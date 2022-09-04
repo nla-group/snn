@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/chenxinye/Desktop/snn_wrapper/runtest.cpp
+iostream
+-
+blasi.h
+/home/chenxinye/Desktop/snn_wrapper/blasi.h
+chrono
+-
+eign.h
+/home/chenxinye/Desktop/snn_wrapper/eign.h
+snn.h
+/home/chenxinye/Desktop/snn_wrapper/snn.h
+
+include/blasi.h
+
+include/eign.h
+
+include/snn.h
+vector
+-
+

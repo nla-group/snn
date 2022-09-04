@@ -1,0 +1,4 @@
+/home/chenxinye/Desktop/snn_wrapper/CMakeFiles/edit_cache.dir
+/home/chenxinye/Desktop/snn_wrapper/CMakeFiles/rebuild_cache.dir
+/home/chenxinye/Desktop/snn_wrapper/CMakeFiles/SNN.dir
+/home/chenxinye/Desktop/snn_wrapper/CMakeFiles/snn.dir
