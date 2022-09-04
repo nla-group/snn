@@ -1,1 +1,1 @@
-SNN: A lightweight fast exact radius query algorithm
+# SNN: A lightweight fast exact radius query algorithm
