@@ -33,7 +33,6 @@ matrix_major_col_index(const T *mat, const int *row, const int *col, const int *
     return mat[*col* (*rows) + *row];
 }
 
-//template int func<int>(int a1, int a2);
 template int 
 matrix_major_col_index<int>(const int *mat, const int *row, const int *col, const int *rows);
 
