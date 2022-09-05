@@ -75,8 +75,12 @@ radius = 3.8
 rng = np.random.RandomState(0)
 X = rng.random_sample((n_samples, n_dim))  
 
+// index SNN model
 snn_model = build_snn_model(X)   
+
+// query data
 ind, dist = query_radius(X[0], snn_model, radius)
+
 sort_id = np.argsort(dist)
 print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))# return top 5
 print("distance:", ", ".join([str(i) for i in dist[sort_id][:5]]))  # return top 10
