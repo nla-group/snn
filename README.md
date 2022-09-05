@@ -2,13 +2,12 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-SNN is a fast exact radius neareast neighbor search algorithm. It uses singular value decomposition to reduce the search space and speedup euclidean calculation with BLAS level 2 routine.  SNN enjoys faster speed with trivial python implementation compared to KDtree and Balltree in scikit-learn package. 
+SNN is a fast exact radius neareast neighbor search algorithm. It uses singular value decomposition to reduce the search space and speedup euclidean calculation with BLAS level 2 routine.  SNN enjoys faster speed with trivial python implementation compared to KDtree and Balltree in scikit-learn package. In this repository, we open source the C++ code of SNN with simple Cmake installing procedure. 
 
 
 
 ### Installation
-
-We open source the C++ code with simple Cmake installing procedure. SNN has dependencies on CBLAS and LAPACK, ensure install them before formally installing SNN. LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/).
+SNN has dependencies on CBLAS and LAPACK, ensure install them before formally installing SNN. LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/).
 
 Install SNN simply by, please modify the ``CMakeList.txt`` file according to your LAPACK location.  
 ```sh
