@@ -38,7 +38,7 @@ double df[rows*cols] = {
   0.83261985, 0.97861834, 0.78052918, 0.14335329, 0.41466194
 }; // data
 
- // index SNN model
+// index SNN model
 SNN_MODEL<double, double> snn_model_Test(df, rows, cols);
 
 // query data
