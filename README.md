@@ -10,7 +10,7 @@ SNN is a fast exact radius neareast neighbor search algorithm. It uses singular 
 
 We open source the C++ code with simple Cmake installing procedure. SNN has dependencies on CBLAS and LAPACK, ensure install them before formally installing SNN. 
 
-```
+```sh
 git clone https://github.com/nla-group/snn.git
 cd snn
 cmake . # or mkdir build -> cd build -> cmake ../
@@ -25,7 +25,7 @@ For example, you can use g++ by 'g++ your_code.cpp libsnn.a -o output -llapacke 
 
 SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
 
-```
+```c++
 int rows = 10;
 int cols = 3;
 double df[rows*cols] = {0.5488135 , 0.54488318, 0.43758721, 0.38344152, 0.56804456,
