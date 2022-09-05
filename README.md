@@ -63,7 +63,7 @@ You can also use python trivial implementation of SNN, simply install
 pip install snnpy
 ```
 
-The example illustrate the use of SNN:
+The example illustrates the use of SNN:
 
 ```python
 import numpy as np
