@@ -1,7 +1,7 @@
 ## SNN: A lightweight fast exact radius query algorithm
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![!pypi](https://img.shields.io/pypi/v/snnpy?color=darkgreen)](https://pypi.org/project/snnpy/)
+[![!pypi](https://img.shields.io/pypi/v/snnpy?color=yellowgreen)](https://pypi.org/project/snnpy/)
 
 SNN is a fast exact radius neareast neighbor search algorithm. It uses singular value decomposition to reduce the search space and speedup euclidean calculation with BLAS level 2 routine.  SNN enjoys faster speed with trivial python implementation compared to KDtree and Balltree in scikit-learn package. In this repository, we open source the C++ code of SNN with simple Cmake installing procedure. 
 
