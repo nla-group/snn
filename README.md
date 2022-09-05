@@ -52,4 +52,10 @@ vector<double> knnDist;
 
  // employ query. the 0.4 refers to radius (range) 
 snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
+```
+
+### License
+All the content in this repository is licensed under the MIT License.
+
+Copyright © 2022 NLA group
 
