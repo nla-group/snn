@@ -19,7 +19,7 @@ make
 ```
 
 After installation, you can just use 'include "snn.h"' in your code, while compile it simply by linking libsnn.a, CBLAS and LAPACK library. 
-For example, you can use g++ by 'g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W'.
+For example, you can use g++ by ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
 
 
 ### User Guide
