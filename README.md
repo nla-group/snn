@@ -12,6 +12,7 @@ We open source the C++ code with simple Cmake installing procedure. SNN has depe
 
 ```
 git clone https://github.com/nla-group/snn.git
+cd snn
 cmake . # or mkdir build -> cd build -> cmake ../
 make 
 ```
