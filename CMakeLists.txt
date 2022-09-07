@@ -11,8 +11,8 @@ set(SOURCE_DIR src)
 
 file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR}/*.cpp)
 
-find_library(LAPACK liblapacke.a REQUIRED PATHS /usr/lib/liblapack.a) # link lapacke
-find_library(CBLAS libcblas.a REQUIRED PATHS /usr/lib/libblas.a) # link blas
+find_library(LAPACK liblapack.a REQUIRED PATHS /usr/lib/liblapack.a) # link lapacke
+find_library(CBLAS librefblas.a REQUIRED PATHS /usr/lib/librefblas.a) # link blas
 
 
 add_library(snn STATIC ${LAPACK} ${CBLAS} ${SRC_FILES})
