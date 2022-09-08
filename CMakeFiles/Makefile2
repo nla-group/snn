@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chenxinye/Desktop/snn_wrapper
+CMAKE_SOURCE_DIR = /home/chenxinye/Desktop/OPENMP_SNN/snn
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chenxinye/Desktop/snn_wrapper
+CMAKE_BINARY_DIR = /home/chenxinye/Desktop/OPENMP_SNN/snn
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -76,14 +76,14 @@ clean: CMakeFiles/snn.dir/clean
 CMakeFiles/SNN.dir/all: CMakeFiles/snn.dir/all
 	$(MAKE) -f CMakeFiles/SNN.dir/build.make CMakeFiles/SNN.dir/depend
 	$(MAKE) -f CMakeFiles/SNN.dir/build.make CMakeFiles/SNN.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=1,2 "Built target SNN"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=1,2 "Built target SNN"
 .PHONY : CMakeFiles/SNN.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SNN.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/snn_wrapper/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SNN.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/snn_wrapper/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles 0
 .PHONY : CMakeFiles/SNN.dir/rule
 
 # Convenience name for target.
@@ -103,14 +103,14 @@ CMakeFiles/SNN.dir/clean:
 CMakeFiles/snn.dir/all:
 	$(MAKE) -f CMakeFiles/snn.dir/build.make CMakeFiles/snn.dir/depend
 	$(MAKE) -f CMakeFiles/snn.dir/build.make CMakeFiles/snn.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=3,4,5,6 "Built target snn"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=3,4,5,6 "Built target snn"
 .PHONY : CMakeFiles/snn.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/snn.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/snn_wrapper/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/snn.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/snn_wrapper/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles 0
 .PHONY : CMakeFiles/snn.dir/rule
 
 # Convenience name for target.

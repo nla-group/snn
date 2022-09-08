@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/chenxinye/Desktop/snn_wrapper/include 
+CXX_INCLUDES = -I/home/chenxinye/Desktop/OPENMP_SNN/snn/include 
 

@@ -214,6 +214,8 @@ int main(){
                     0.0202184 , 0.87001215, 0.46147936, 0.63992102, 0.52184832,
                     0.60276338, 0.64589411, 0.96366276, 0.52889492, 0.07103606,
                     0.83261985, 0.97861834, 0.78052918, 0.14335329, 0.41466194};
+
+    printMat(snn_test_mat, rows, cols);
     SNN_MODEL<double, double> snn_model_Test(snn_test_mat, rows, cols);
     
     double query[cols] = {0.5488135 , 0.71518937, 0.60276338};
@@ -221,6 +223,8 @@ int main(){
     vector<double> knnDist;
     snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
 
+
+    cout << "query 1" << endl;
     cout << "sort ID" << endl;
     for (auto i: snn_model_Test.sortID) {
         cout << i << " ";
@@ -236,6 +240,50 @@ int main(){
     for (auto i: knnDist) {
         cout << i << " ";
     }
+
+
+    cout << endl;
+    cout << "\nquery 2" << endl;
+    double query2[cols] = {0.944669, 0.521848, 0.414662};
+    snn_model_Test.radius_single_query(query2, 0.4, &knnID, &knnDist);
+
+    cout << "sort ID" << endl;
+    for (auto i: snn_model_Test.sortID) {
+        cout << i << " ";
+    }
+    cout << endl;
+    cout << "knnID" << endl;
+    for (auto i: knnID) {
+        cout << i << " ";
+    }
+    
+    cout << endl;
+    cout << "knnDist" << endl;
+    for (auto i: knnDist) {
+        cout << i << " ";
+    }
+
+    
+    cout << "\n\ntest 10" << endl; 
+    double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276338, 0.414662};
+    vector<vector<int> > batch_knnID;
+    vector<vector<double> > batch_knnDist;
+    snn_model_Test.radius_batch_query(query_batch, 0.4, &batch_knnID, &batch_knnDist, 2);
+
+    for (int j=0; j<2; j++){
+        cout << "knnID" << endl;
+        for (auto i: batch_knnID[j]){
+            cout << i << " ";
+        }
+
+        cout << "\nknnDist" << endl;
+        for (auto i: batch_knnDist[j]){
+            cout << i << " ";
+        }
+
+        cout << endl;
+    }
+
     #endif
     return 0;
 
@@ -286,7 +334,7 @@ template <typename T> void
 printMat(T *mat, int rows, int cols){
     double value;
     for (int i=0; i<rows; i++){
-        for (int j=0; j<rows; j++){
+        for (int j=0; j<cols; j++){
             value = matrix_major_col_index(mat, &i, &j, &rows);
             cout << value << " "; 
         }

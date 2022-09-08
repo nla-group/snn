@@ -1,4 +1,4 @@
-# Install script for directory: /home/chenxinye/Desktop/snn_wrapper
+# Install script for directory: /home/chenxinye/Desktop/OPENMP_SNN/snn
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/chenxinye/Desktop/snn_wrapper/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/chenxinye/Desktop/OPENMP_SNN/snn/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -35,8 +35,8 @@ matrix_major_col_index(const T *mat, const int *row, const int *col, const int *
 template<typename T> void 
 vector_scalar_add(const T *arr, const T *scalar, T *ret, const int *size, const int *start, const int *end);
 
-template<typename T> void 
-vector_scalar_sub(const T *arr, const T *scalar, T *ret, const int *size, const int *start, const int *end);
+template<typename T1, typename T2> void 
+vector_scalar_sub(const T1 *arr, const T2 *scalar, T1 *ret, const int *size, const int *start, const int *end);
 
 
 template<typename T> void 
@@ -46,11 +46,11 @@ template<typename T> void
 vector_scalar_multi(const T *arr, const T *scalar, T *ret, const int *size, const int *start, const int *end);
 
 
-template<typename T1, typename T2> void 
-vector_vector_sub(T1 *arr1, T2 *arr2, T2 *ret, const int *size);
+template<typename T1, typename T2, typename T3> void 
+vector_vector_sub(T1 *arr1, T2 *arr2, T3 *ret, const int *size);
 
-template<typename T> void 
-vector_inner_prod(const T *arr1, const T *arr2, T *ret, const int *size);
+template<typename T1, typename T2, typename T3> void 
+vector_inner_prod(const T1 *arr1, const T2 *arr2, T3 *ret, const int *size);
 
 template<typename T> void 
 filter_less(const T *arr, const T *filterVal, bool *ret, const int *size);
@@ -66,8 +66,8 @@ extern matrix_vector_prod(const T *mat, const T *arr, T *ret, const int *rows, c
 void // double limit
 blas_matrix_vector_prod1(const double *mat, const double *arr, double *ret, const int *rows, const int *cols);
 
-template<typename T> void // trivial implementation
-blas_matrix_vector_prod2(const T *mat, const T *arr, T *ret, const int *rows, const int *cols,
+template<typename T1, typename T2> void // trivial implementation
+blas_matrix_vector_prod2(const T1*mat, const T2 *arr, T1 *ret, const int *rows, const int *cols,
                          const double *alpha, const int *start, const int *end);
 
 
@@ -90,7 +90,9 @@ void
 calculate_skip_euclid_norm(const double *xxt, const double *mat, const double *arr, double *ret,
                              const int *rows, const int *cols, const int *start, const int *end);
 
-
+void
+calculate_skip_euclid_norm(const double *xxt, const double *mat, const float *arr, double *ret,
+                             const int *rows, const int *cols, const int *start, const int *end);
 template<typename T> T * 
 selectArray(const T *arr, const int start, const int end);
 

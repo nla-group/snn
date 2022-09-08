@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chenxinye/Desktop/snn_wrapper
+CMAKE_SOURCE_DIR = /home/chenxinye/Desktop/OPENMP_SNN/snn
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chenxinye/Desktop/snn_wrapper
+CMAKE_BINARY_DIR = /home/chenxinye/Desktop/OPENMP_SNN/snn
 
 # Include any dependencies generated for this target.
 include CMakeFiles/snn.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/snn.dir/flags.make
 
 CMakeFiles/snn.dir/src/blasi.cpp.o: CMakeFiles/snn.dir/flags.make
 CMakeFiles/snn.dir/src/blasi.cpp.o: src/blasi.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/snn.dir/src/blasi.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/blasi.cpp.o -c /home/chenxinye/Desktop/snn_wrapper/src/blasi.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/snn.dir/src/blasi.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/blasi.cpp.o -c /home/chenxinye/Desktop/OPENMP_SNN/snn/src/blasi.cpp
 
 CMakeFiles/snn.dir/src/blasi.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/snn.dir/src/blasi.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/snn_wrapper/src/blasi.cpp > CMakeFiles/snn.dir/src/blasi.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/OPENMP_SNN/snn/src/blasi.cpp > CMakeFiles/snn.dir/src/blasi.cpp.i
 
 CMakeFiles/snn.dir/src/blasi.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/snn.dir/src/blasi.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/snn_wrapper/src/blasi.cpp -o CMakeFiles/snn.dir/src/blasi.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/OPENMP_SNN/snn/src/blasi.cpp -o CMakeFiles/snn.dir/src/blasi.cpp.s
 
 CMakeFiles/snn.dir/src/eign.cpp.o: CMakeFiles/snn.dir/flags.make
 CMakeFiles/snn.dir/src/eign.cpp.o: src/eign.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/snn.dir/src/eign.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/eign.cpp.o -c /home/chenxinye/Desktop/snn_wrapper/src/eign.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/snn.dir/src/eign.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/eign.cpp.o -c /home/chenxinye/Desktop/OPENMP_SNN/snn/src/eign.cpp
 
 CMakeFiles/snn.dir/src/eign.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/snn.dir/src/eign.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/snn_wrapper/src/eign.cpp > CMakeFiles/snn.dir/src/eign.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/OPENMP_SNN/snn/src/eign.cpp > CMakeFiles/snn.dir/src/eign.cpp.i
 
 CMakeFiles/snn.dir/src/eign.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/snn.dir/src/eign.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/snn_wrapper/src/eign.cpp -o CMakeFiles/snn.dir/src/eign.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/OPENMP_SNN/snn/src/eign.cpp -o CMakeFiles/snn.dir/src/eign.cpp.s
 
 CMakeFiles/snn.dir/src/snn.cpp.o: CMakeFiles/snn.dir/flags.make
 CMakeFiles/snn.dir/src/snn.cpp.o: src/snn.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/snn.dir/src/snn.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/snn.cpp.o -c /home/chenxinye/Desktop/snn_wrapper/src/snn.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/snn.dir/src/snn.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/snn.dir/src/snn.cpp.o -c /home/chenxinye/Desktop/OPENMP_SNN/snn/src/snn.cpp
 
 CMakeFiles/snn.dir/src/snn.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/snn.dir/src/snn.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/snn_wrapper/src/snn.cpp > CMakeFiles/snn.dir/src/snn.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chenxinye/Desktop/OPENMP_SNN/snn/src/snn.cpp > CMakeFiles/snn.dir/src/snn.cpp.i
 
 CMakeFiles/snn.dir/src/snn.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/snn.dir/src/snn.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/snn_wrapper/src/snn.cpp -o CMakeFiles/snn.dir/src/snn.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chenxinye/Desktop/OPENMP_SNN/snn/src/snn.cpp -o CMakeFiles/snn.dir/src/snn.cpp.s
 
 # Object files for target snn
 snn_OBJECTS = \
@@ -110,7 +110,7 @@ libsnn.a: CMakeFiles/snn.dir/src/eign.cpp.o
 libsnn.a: CMakeFiles/snn.dir/src/snn.cpp.o
 libsnn.a: CMakeFiles/snn.dir/build.make
 libsnn.a: CMakeFiles/snn.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chenxinye/Desktop/snn_wrapper/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libsnn.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libsnn.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/snn.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/snn.dir/link.txt --verbose=$(VERBOSE)
 
@@ -124,6 +124,6 @@ CMakeFiles/snn.dir/clean:
 .PHONY : CMakeFiles/snn.dir/clean
 
 CMakeFiles/snn.dir/depend:
-	cd /home/chenxinye/Desktop/snn_wrapper && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chenxinye/Desktop/snn_wrapper /home/chenxinye/Desktop/snn_wrapper /home/chenxinye/Desktop/snn_wrapper /home/chenxinye/Desktop/snn_wrapper /home/chenxinye/Desktop/snn_wrapper/CMakeFiles/snn.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/chenxinye/Desktop/OPENMP_SNN/snn && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chenxinye/Desktop/OPENMP_SNN/snn /home/chenxinye/Desktop/OPENMP_SNN/snn /home/chenxinye/Desktop/OPENMP_SNN/snn /home/chenxinye/Desktop/OPENMP_SNN/snn /home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles/snn.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/snn.dir/depend
 

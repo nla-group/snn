@@ -47,6 +47,22 @@ class SNN_MODEL{
         ~SNN_MODEL();
         
         void extract_principal_axis(const double *vt, double *axis, const int *cols, const int num);
-        void radius_single_query(T1 *query, double radius, std::vector<int> *knnID, std::vector<double> *knnDist);
+        void radius_single_query(T2 *query, double radius, std::vector<int> *knnID, std::vector<double> *knnDist);
+        void radius_batch_query(T1 *queries, double radius, std::vector<std::vector<int> > *knnID, std::vector<std::vector<double> > *knnDist, 
+                                const int qrows);
         static int binarySearch(T2 *arr, T2 point, int *size);
 };
+
+
+void
+extract_sample(double *queries, double *query, const int num, const int *rows, const int *cols);
+
+void
+extract_sample(double *queries, float *query, const int num, const int *rows, const int *cols);
+
+void
+extract_sample(float *queries, double *query, const int num, const int *rows, const int *cols);
+
+
+void insert_vector(std::vector<std::vector<int> > *knnID, std::vector<std::vector<double> > *knnDist, 
+                        std::vector<int> *knnID_unit, std::vector<double> *knnDist_unit, int i, int qcols);

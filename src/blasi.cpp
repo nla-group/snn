@@ -61,21 +61,24 @@ template void
 vector_scalar_add<double>(const double *arr, const double *scalar, double *ret, const int *size, const int *start, const int *end);
 
 
-template<typename T> void 
-vector_scalar_sub(const T *arr, const T *scalar, T *ret, const int *size, const int *start, const int *end){
+template<typename T1, typename T2> void 
+vector_scalar_sub(const T1 *arr, const T2 *scalar, T1 *ret, const int *size, const int *start, const int *end){
     for (int i=*start; i<std::min(*size, *end); i++){
         *(ret + i) = *(arr + i) -  *scalar;
     }
 }
 
 template void 
-vector_scalar_sub<int>(const int *arr, const int *scalar, int *ret, const int *size, const int *start, const int *end);
+vector_scalar_sub<int, int>(const int *arr, const int *scalar, int *ret, const int *size, const int *start, const int *end);
 
 template void 
-vector_scalar_sub<float>(const float *arr, const float *scalar, float *ret, const int *size, const int *start, const int *end);
+vector_scalar_sub<float, float>(const float *arr, const float *scalar, float *ret, const int *size, const int *start, const int *end);
 
 template void 
-vector_scalar_sub<double>(const double *arr, const double *scalar, double *ret, const int *size, const int *start, const int *end);
+vector_scalar_sub<double, double>(const double *arr, const double *scalar, double *ret, const int *size, const int *start, const int *end);
+
+template void 
+vector_scalar_sub<float, double>(const float *arr, const double *scalar, float *ret, const int *size, const int *start, const int *end);
 
 
 template<typename T> void 
@@ -113,33 +116,34 @@ template void
 vector_scalar_multi<double>(const double *arr, const double *scalar, double *ret, const int *size, const int *start, const int *end);
 
 
-template<typename T1, typename T2> void 
-vector_vector_sub(T1 *arr1, T2 *arr2, T2 *ret, const int *size){
+template<typename T1, typename T2, typename T3> void 
+vector_vector_sub(T1 *arr1, T2 *arr2, T3 *ret, const int *size){
     for (int i=0; i<*size; i++){
         *(ret + i) = *(arr1 + i) - *(arr2 + i);
     }
 }
 
 template void 
-vector_vector_sub<int, int>(int *arr1, int *arr2, int *ret, const int *size);
+vector_vector_sub<int, int, int>(int *arr1, int *arr2, int *ret, const int *size);
 
 template void 
-vector_vector_sub<float, float>(float *arr1, float *arr2, float *ret, const int *size);
+vector_vector_sub<float, float, float>(float *arr1, float *arr2, float *ret, const int *size);
 
 template void 
-vector_vector_sub<double, double>(double *arr1, double *arr2, double *ret, const int *size);
+vector_vector_sub<double, double, double>(double *arr1, double *arr2, double *ret, const int *size);
 
 template void 
-vector_vector_sub<int, double>(int *arr1, double *arr2, double *ret, const int *size);
+vector_vector_sub<int, double, int>(int *arr1, double *arr2, int *ret, const int *size);
 
 template void 
-vector_vector_sub<float, double>(float *arr1, double *arr2, double *ret, const int *size);
+vector_vector_sub<float, double, float>(float *arr1, double *arr2, float *ret, const int *size);
+
+template void 
+vector_vector_sub<double, double, float>(double *arr1, double *arr2, float *ret, const int *size);
 
 
-
-
-template<typename T> void 
-vector_inner_prod(const T *arr1, const T *arr2, T *ret, const int *size){
+template<typename T1, typename T2, typename T3> void 
+vector_inner_prod(const T1 *arr1, const T2 *arr2, T3 *ret, const int *size){
     *ret = 0;
     for (int i=0; i<*size; i++){
         *ret += *(arr1 + i) * *(arr2 + i);
@@ -148,13 +152,19 @@ vector_inner_prod(const T *arr1, const T *arr2, T *ret, const int *size){
 
 
 template void 
-vector_inner_prod<int>(const int *arr1, const int *arr2, int *ret, const int *size);
+vector_inner_prod<int, int, int>(const int *arr1, const int *arr2, int *ret, const int *size);
 
 template void 
-vector_inner_prod<float>(const float *arr1, const float *arr2, float *ret, const int *size);
+vector_inner_prod<float, float, float>(const float *arr1, const float *arr2, float *ret, const int *size);
 
 template void 
-vector_inner_prod<double>(const double *arr1, const double *arr2, double *ret, const int *size);
+vector_inner_prod<double, double, double>(const double *arr1, const double *arr2, double *ret, const int *size);
+
+template void 
+vector_inner_prod<float, double, double>(const float *arr1, const double *arr2, double *ret, const int *size);
+
+template void 
+vector_inner_prod<float, float, double>(const float *arr1, const float *arr2, double *ret, const int *size);
 
 
 template<typename T> void 
@@ -208,8 +218,8 @@ blas_matrix_vector_prod1(const double *mat, const double *arr, double *ret, cons
 }
 
 
-template<typename T> void // trivial implementation
-blas_matrix_vector_prod2(const T *mat, const T *arr, T *ret, const int *rows, const int *cols, const double *alpha, const int *start, const int *end){
+template<typename T1, typename T2> void // trivial implementation
+blas_matrix_vector_prod2(const T1 *mat, const T2 *arr, T1 *ret, const int *rows, const int *cols, const double *alpha, const int *start, const int *end){
     for (int i=*start; i<std::min(*rows, *end); i++){
         *(ret + i) = 0.0;
         for (int j=0; j<*cols; j++){
@@ -220,15 +230,17 @@ blas_matrix_vector_prod2(const T *mat, const T *arr, T *ret, const int *rows, co
 
 
 template void 
-blas_matrix_vector_prod2<int>(const int *mat, const int *arr, int *ret, const int *rows, const int *cols,
+blas_matrix_vector_prod2<int, int>(const int *mat, const int *arr, int *ret, const int *rows, const int *cols,
                                              const double *alpha, const int *start, const int *end);
 template void 
-blas_matrix_vector_prod2<float>(const float *mat, const float *arr, float *ret, const int *rows, const int *cols, 
+blas_matrix_vector_prod2<float, float>(const float *mat, const float *arr, float *ret, const int *rows, const int *cols, 
                                             const double *alpha, const int *start, const int *end);
 template void 
-blas_matrix_vector_prod2<double>(const double *mat, const double *arr, double *ret, const int *rows, const int *cols,
+blas_matrix_vector_prod2<double, double>(const double *mat, const double *arr, double *ret, const int *rows, const int *cols,
                                              const double *alpha, const int *start, const int *end);
-
+template void 
+blas_matrix_vector_prod2<double, float>(const double *mat, const float *arr, double *ret, const int *rows, const int *cols,
+                                             const double *alpha, const int *start, const int *end);
 
 template<typename T> void 
 blas_norm_matrix(const T *mat, T *ret, const int *rows, const int *cols){
@@ -323,6 +335,22 @@ calculate_skip_euclid_norm(const double *xxt, const double *mat, const double *a
     blas_matrix_vector_prod2(mat, arr, MatV, rows, cols, &alpha, start, end);
     vector_vector_sub(ret, MatV, ret, rows);
 }
+
+
+void 
+calculate_skip_euclid_norm(const double *xxt, const double *mat, const float *arr, double *ret,
+                             const int *rows, const int *cols, const int *start, const int *end){
+                                // the rows refers to the mat
+    
+    double inner_prod;
+    double MatV[*rows];
+    double alpha = 2;
+    vector_inner_prod(arr, arr, &inner_prod, cols);
+    vector_scalar_add(xxt, &inner_prod, ret,  rows, start, end);
+    blas_matrix_vector_prod2(mat, arr, MatV, rows, cols, &alpha, start, end);
+    vector_vector_sub(ret, MatV, ret, rows);
+}
+
 
 
 template<typename T> T * 

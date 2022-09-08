@@ -27,6 +27,7 @@ SOFTWARE.
 #include "blasi.h"
 #include "eign.h"
 #include "snn.h"
+#include <omp.h>
 #include <cmath>
 #include <vector>
 #include <numeric>
@@ -221,10 +222,10 @@ SNN_MODEL<T1, T2>::~SNN_MODEL(){
 }
 
 
-// Query
+// query
 template <class T1, class T2> void 
-SNN_MODEL<T1, T2>::radius_single_query(T1 *query, double radius, std::vector<int> *knnID, std::vector<double> *knnDist){
-    double *query_copy = new double[cols];
+SNN_MODEL<T1, T2>::radius_single_query(T2 *query, double radius, std::vector<int> *knnID, std::vector<double> *knnDist){
+    T1 *query_copy = new T1[cols];
     std::copy(query, query+cols, query_copy);
     vector_vector_sub(query, mu, query_copy, &cols);
     
@@ -249,8 +250,70 @@ SNN_MODEL<T1, T2>::radius_single_query(T1 *query, double radius, std::vector<int
     }
 
     delete []query_copy;
-
+    query_copy = nullptr;
 }
+
+
+void 
+extract_sample(double *queries, double *query, const int num, const int *rows, const int *cols){ // columns major order
+    for (int i=0; i<*cols; i++){
+        *(query + i) = *(queries + *rows * i + num);
+    }
+}
+
+void
+extract_sample(double *queries, float *query, const int num, const int *rows, const int *cols){ // columns major order
+    for (int i=0; i<*cols; i++){
+        *(query + i) = *(queries + *rows * i + num);
+    }
+}
+
+
+void
+extract_sample(float *queries, double *query, const int num, const int *rows, const int *cols){ // columns major order
+    for (int i=0; i<*cols; i++){
+        *(query + i) = *(queries + *rows * i + num);
+    }
+}
+
+
+void insert_vector(std::vector<std::vector<int> > *knnID, std::vector<std::vector<double> > *knnDist, 
+                        std::vector<int> *knnID_unit, std::vector<double> *knnDist_unit, int i, int qcols){
+
+    for (int j=0; j<qcols; j++){
+        (*knnID)[i][j] = (*knnID_unit)[j];
+        (*knnDist)[i][j] = (*knnDist_unit)[j];
+    }
+}
+
+
+// query in batch
+template <class T1, class T2> void 
+SNN_MODEL<T1, T2>::radius_batch_query(T1 *queries, double radius, std::vector<std::vector<int> > *knnID, 
+                                      std::vector<std::vector<double> > *knnDist, const int qrows){
+    double query[cols];
+    std::vector<int> knnID_unit;
+    std::vector<double> knnDist_unit;
+
+
+    (*knnID).clear();
+    (*knnDist).clear();
+
+    (*knnID).resize(qrows);
+    (*knnDist).resize(qrows);
+
+    #pragma omp parallel for
+    for (int i=0; i<qrows; i++){
+        extract_sample(queries, query, i, &qrows, &cols);
+        this->radius_single_query(query, radius, &knnID_unit, &knnDist_unit);
+
+        (*knnID)[i].resize(knnID_unit.size());
+        (*knnDist)[i].resize(knnDist_unit.size());
+        insert_vector(knnID, knnDist, &knnID_unit, &knnDist_unit, i, knnID_unit.size());
+    }
+        
+}
+
 
 
 template <class T1, class T2>  inline int // for 1-dimensional data
@@ -279,6 +342,6 @@ SNN_MODEL<T1, T2>::binarySearch(T2 *arr, T2 point, int *size){
 }
 
 
-template class SNN_MODEL<int, double>;
+// template class SNN_MODEL<int, double>;
 template class SNN_MODEL<float, double>;
 template class SNN_MODEL<double, double>;
