@@ -28,6 +28,8 @@ For example, you can use g++ by ``g++ your_code.cpp libsnn.a -o output -llapacke
 
 SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
 
+We fist prepare the data:
+
 ```c++
 int rows = 10;
 int cols = 3;
@@ -52,14 +54,17 @@ double df[rows*cols] = {
 0.799159 0.461479 0.780529 
 0.118274 0.639921 0.143353 
 0.944669 0.521848 0.414662 
-
 *
 ```
 
+Then, we index the SNN model, specify the number of objects and feature dimensions in the data:
 ```c++
 // index SNN model
 SNN_MODEL<double, double> snn_model_Test(df, rows, cols);
 ```
+
+
+Query simple query as below:
 
 ```c++
 // query data
@@ -76,8 +81,8 @@ snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
 ```
 
 
- ```c++
- 
+We can also query multiple objects:
+```c++
  // employ two queries, parallel compute by openMP
 double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276338, 0.414662};
 
