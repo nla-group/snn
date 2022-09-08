@@ -38,11 +38,30 @@ double df[rows*cols] = {
   0.0202184 , 0.87001215, 0.46147936, 0.63992102, 0.52184832,
   0.60276338, 0.64589411, 0.96366276, 0.52889492, 0.07103606,
   0.83261985, 0.97861834, 0.78052918, 0.14335329, 0.41466194
-}; // data
+}; 
 
+/* data -- column major order
+
+0.548813 0.715189 0.602763 
+0.544883 0.423655 0.645894 
+0.437587 0.891773 0.963663 
+0.383442 0.791725 0.528895 
+0.568045 0.925597 0.0710361 
+0.0871293 0.0202184 0.83262 
+0.778157 0.870012 0.978618 
+0.799159 0.461479 0.780529 
+0.118274 0.639921 0.143353 
+0.944669 0.521848 0.414662 
+
+*
+```
+
+```c++
 // index SNN model
 SNN_MODEL<double, double> snn_model_Test(df, rows, cols);
+```
 
+```c++
 // query data
 double query[cols] = {0.5488135 , 0.71518937, 0.60276338}; 
 
@@ -54,12 +73,17 @@ vector<double> knnDist;
 
 // employ single query, the 0.4 refers to radius (range) 
 snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
+```
 
 
+ ```c++
+ 
  // employ two queries, parallel compute by openMP
 double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276338, 0.414662};
+
 vector<vector<int> > batch_knnID;
 vector<vector<double> > batch_knnDist;
+
 snn_model_Test.radius_batch_query(query_batch, 0.4, &batch_knnID, &batch_knnDist, 2);
 
 for (int j=0; j<2; j++){
