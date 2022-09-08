@@ -8,7 +8,7 @@ SNN is a fast exact radius neareast neighbor search algorithm. It uses singular 
 
 
 ### Installation
-SNN has dependencies on CBLAS and LAPACK, ensure install them before formally installing SNN. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/).
+SNN has dependencies on CBLAS, LAPACK and openMP, ensure install them before formally installing SNN. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/).
 
 Install SNN simply by, please modify the ``CMakeList.txt`` file according to your LAPACK location.  
 ```sh
@@ -52,8 +52,41 @@ vector<int> knnID;
 // create the variable storing neighbors' distance to the query
 vector<double> knnDist; 
 
- // employ query. the 0.4 refers to radius (range) 
+// employ single query, the 0.4 refers to radius (range) 
 snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
+
+
+ // employ two queries, parallel compute by openMP
+double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276338, 0.414662};
+vector<vector<int> > batch_knnID;
+vector<vector<double> > batch_knnDist;
+snn_model_Test.radius_batch_query(query_batch, 0.4, &batch_knnID, &batch_knnDist, 2);
+
+for (int j=0; j<2; j++){
+    cout << "knnID" << endl;
+    for (auto i: batch_knnID[j]){
+        cout << i << " ";
+    }
+
+    cout << "\nknnDist" << endl;
+    for (auto i: batch_knnDist[j]){
+        cout << i << " ";
+    }
+
+    cout << endl;
+}
+
+/* output
+  knnID
+  3 0 1 7 
+  knnDist
+  0.196627 0 0.294734 0.398299 
+
+  knnID
+  9 7 
+  knnDist
+  3.35193e-07 0.398342
+*/
 ```
 
 
