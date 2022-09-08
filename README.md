@@ -29,7 +29,6 @@ For example, you can use g++ by ``g++ your_code.cpp libsnn.a -o output -llapacke
 SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
 
 We fist prepare the data:
-
 ```c++
 int rows = 10;
 int cols = 3;
@@ -65,7 +64,6 @@ SNN_MODEL<double, double> snn_model_Test(df, rows, cols);
 
 
 Query simple query as below:
-
 ```c++
 // query data
 double query[cols] = {0.5488135 , 0.71518937, 0.60276338}; 
