@@ -12,8 +12,8 @@ set(SOURCE_DIR src)
 file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR}/*.cpp)
 
 find_package(OpenMP)
-find_library(LAPACK) # link lapacke
-find_library(CBLAS) # link blas
+find_package(LAPACK) # link lapacke
+find_package(CBLAS) # link blas
 
 add_library(snn STATIC ${LAPACK} ${CBLAS} ${SRC_FILES})
 
