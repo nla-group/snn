@@ -1,5 +1,6 @@
 ## SNN: A lightweight fast exact radius query algorithm
 
+[![C/C++ CI](https://github.com/nla-group/snn/actions/workflows/make.yml/badge.svg)](https://github.com/nla-group/snn/actions/workflows/make.yml)
 [![!pypi](https://img.shields.io/pypi/v/snnpy?color=white)](https://pypi.org/project/snnpy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
