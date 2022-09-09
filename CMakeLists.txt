@@ -15,14 +15,15 @@ find_package(OpenMP)
 find_package(LAPACK) # link lapacke
 find_package(BLAS) # link blas
 
-add_library(snn STATIC ${LAPACK} ${CBLAS} ${SRC_FILES})
+add_library(snn STATIC ${SRC_FILES})
 
 
 target_include_directories(snn PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
+target_link_libraries(snn PUBLIC ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES})
 
 add_executable(SNN ${CMAKE_CURRENT_SOURCE_DIR}/runtest.cpp)
 
 if(OpenMP_CXX_FOUND) #openMP
     target_link_libraries(SNN PUBLIC OpenMP::OpenMP_CXX)
 endif()
-target_link_libraries(SNN PUBLIC snn ${LAPACK} ${BLAS})
+target_link_libraries(SNN PUBLIC snn ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES})
