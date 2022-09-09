@@ -14,6 +14,7 @@ set(SOURCE_DIR src)
 file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR}/*.cpp)
 
 find_package(OpenMP)
+find_package(LAPACK)
 find_package(LAPACKE) # link lapacke
 find_package(BLAS) # link blas
 
