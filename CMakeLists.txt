@@ -25,4 +25,4 @@ add_executable(SNN ${CMAKE_CURRENT_SOURCE_DIR}/runtest.cpp)
 if(OpenMP_CXX_FOUND) #openMP
     target_link_libraries(SNN PUBLIC OpenMP::OpenMP_CXX)
 endif()
-target_link_libraries(SNN PUBLIC snn ${LAPACK} ${CBLAS})
+target_link_libraries(SNN PUBLIC snn ${LAPACK} ${BLAS})
