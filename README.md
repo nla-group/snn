@@ -139,7 +139,7 @@ rng = np.random.RandomState(0)
 X = rng.random_sample((n_samples, n_dim))  
 
 # index SNN model
-snn_model = build_snn_model(X)   
+snn_model = build_snn_model(X, return_dist=False)   
 
 # query data
 ind, dist = query_radius(X[0], snn_model, radius)
