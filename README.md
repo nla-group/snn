@@ -142,7 +142,7 @@ X = rng.random_sample((n_samples, n_dim))
 snn_model = build_snn_model(X, return_dist=False)   
 
 # query data
-ind, dist = query_radius(X[0], snn_model, radius)
+ind, dist = snn.query_radius(X[0], radius)
 
 sort_id = np.argsort(dist)
 
