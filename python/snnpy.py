@@ -1,0 +1,103 @@
+
+import numpy as np
+from scipy.linalg import get_blas_funcs, eigh
+    
+
+def euclid(xxt, X, v):
+    return (xxt + np.inner(v,v).ravel() -2*X.dot(v)).astype(float)
+
+
+
+def euclid_batch(xxt, inner_queries, ddata_queries, i):
+    return (xxt + inner_queries[i] - 2*ddata_queries[i])
+
+
+
+class build_snn_model:
+    def __init__( self, data, return_dist=False):
+        self.mu = data.mean(axis=0)
+        self.return_dist = return_dist
+        data = data - self.mu
+        if data.shape[1]>1:
+            gemm = get_blas_funcs("gemm", [data.T, data])
+            dTd = gemm(1, data.T, data)
+            _, v = eigh(dTd, subset_by_index=[data.shape[1]-1, data.shape[1]-1])
+            sort_vals = data@v.reshape(-1)
+        else:
+            sort_vals = data[:,0].reshape(-1)
+        
+        self.sort_id = np.argsort(sort_vals)
+        self.sort_vals = sort_vals[self.sort_id]
+        self.data = data[self.sort_id]
+        self.v = v.reshape(-1)
+        self.xxt = np.einsum('ij,ij->i', self.data, self.data) # np.linalg.norm(X, axis=1)**2
+    
+
+    def query_radius(self, query, radius):
+        query = np.subtract(query, self.mu)
+        sv_q = np.inner(query, self.v) 
+        left = np.searchsorted(self.sort_vals, sv_q-radius)
+        right = np.searchsorted(self.sort_vals, sv_q+radius)
+        dist_set =  euclid(self.xxt[left:right], self.data[left:right], query)
+
+        filter_radius = dist_set <= radius**2
+        knn_ind = self.sort_id[left:right][filter_radius]
+
+        if self.return_dist:
+            knn_dist = np.sqrt(dist_set[filter_radius])
+            return knn_ind, knn_dist
+        else:
+            return knn_ind
+        
+
+    def batch_query_radius(self, queries, radius):
+        queries = np.subtract(queries, self.mu)
+        sv_qs = np.inner(queries, self.v)
+        lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
+        rights = np.searchsorted(self.sort_vals, sv_qs+radius)
+
+        inner_queries = np.einsum('ij,ij->i', queries, queries) 
+        # extend from np.inner(v,v).ravel(), 1D array
+        
+        gemm = get_blas_funcs("gemm", [queries, self.data.T]) # extend from X.dot(v)
+        ddata_queries = gemm(1, queries, self.data.T) 
+        # extend from self.data.dot(queries[0]), 2D array (n_samples, n_samples)
+
+        knn_ind = list()
+        
+        if self.return_dist:
+            knn_dist = list()
+            
+            for i in range(queries.shape[0]):
+                batch_dist_set = euclid_batch(self.xxt,
+                                              inner_queries, 
+                                              ddata_queries,
+                                              i
+                                             )[lefts[i]:rights[i]]
+
+                filter_radius = batch_dist_set <= radius**2
+                knn_ind.append(
+                    self.sort_id[lefts[i]:rights[i]][filter_radius]
+                )
+                
+                knn_dist.append(
+                    np.sqrt(batch_dist_set[filter_radius])
+                )
+                
+            return knn_ind, knn_dist
+
+        else:
+            for i in range(queries.shape[0]):
+                batch_dist_set = euclid_batch(self.xxt,
+                                              inner_queries, 
+                                              ddata_queries,
+                                              i
+                                             )[lefts[i]:rights[i]]
+
+                filter_radius = batch_dist_set <= radius**2
+                knn_ind.append(
+                    self.sort_id[lefts[i]:rights[i]][filter_radius]
+                )
+
+            return knn_ind
+        
