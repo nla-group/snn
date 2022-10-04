@@ -17,6 +17,7 @@
 # SOFTWARE.
 
 
+
 import numpy as np
 from scipy.linalg import get_blas_funcs, eigh
     
@@ -76,24 +77,26 @@ class build_snn_model:
 
         inner_queries = np.einsum('ij,ij->i', queries, queries) 
         # extend from np.inner(v,v).ravel(), 1D array
-        
-        gemm = get_blas_funcs("gemm", [queries, self.data.T]) # extend from X.dot(v)
-        ddata_queries = gemm(1, queries, self.data.T) 
+
+        ddata_queries = np.inner(queries, self.data)
         # extend from self.data.dot(queries[0]), 2D array (n_samples, n_samples)
 
         knn_ind = list()
         
+        num = queries.shape[0]
+        radius = radius**2
+        
         if self.return_dist:
             knn_dist = list()
             
-            for i in range(queries.shape[0]):
+            for i in range(num):
                 batch_dist_set = euclid_batch(self.xxt,
                                               inner_queries, 
                                               ddata_queries,
                                               i
                                              )[lefts[i]:rights[i]]
 
-                filter_radius = batch_dist_set <= radius**2
+                filter_radius = batch_dist_set <= radius
                 knn_ind.append(
                     self.sort_id[lefts[i]:rights[i]][filter_radius]
                 )
@@ -105,14 +108,14 @@ class build_snn_model:
             return knn_ind, knn_dist
 
         else:
-            for i in range(queries.shape[0]):
+            for i in range(num):
                 batch_dist_set = euclid_batch(self.xxt,
                                               inner_queries, 
                                               ddata_queries,
                                               i
                                              )[lefts[i]:rights[i]]
 
-                filter_radius = batch_dist_set <= radius**2
+                filter_radius = batch_dist_set <= radius
                 knn_ind.append(
                     self.sort_id[lefts[i]:rights[i]][filter_radius]
                 )
