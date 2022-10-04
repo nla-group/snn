@@ -18,6 +18,7 @@
 
 
 
+
 import numpy as np
 from scipy.linalg import get_blas_funcs, eigh
     
@@ -37,11 +38,17 @@ class build_snn_model:
         self.mu = data.mean(axis=0)
         self.return_dist = return_dist
         data = data - self.mu
-        if data.shape[1]>1:
+        if data.shape[1]>1 and data.shape[1]<=2 :
             gemm = get_blas_funcs("gemm", [data.T, data])
             dTd = gemm(1, data.T, data)
             _, v = eigh(dTd, subset_by_index=[data.shape[1]-1, data.shape[1]-1])
             sort_vals = data@v.reshape(-1)
+            
+        elif data.shape[1]>2:
+            dTd = np.dot(data.T, data)
+            _, v = eigh(dTd, subset_by_index=[data.shape[1]-1, data.shape[1]-1])
+            sort_vals = data@v.reshape(-1)
+            
         else:
             sort_vals = data[:,0].reshape(-1)
         
@@ -121,4 +128,5 @@ class build_snn_model:
                 )
 
             return knn_ind
+        
         
