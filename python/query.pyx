@@ -1,7 +1,5 @@
 import numpy as np
-cimport numpy as np 
-from libcpp.vector cimport vector
-from scipy.linalg import get_blas_funcs, eigh
+cimport numpy as np
 
 
 cdef euclid(np.ndarray[np.double_t, ndim=1] xxt,
