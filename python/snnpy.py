@@ -121,9 +121,7 @@ class build_snn_model:
                                               ddata_queries,
                                               i
                                              )[lefts[i]:rights[i]]
-
-                filter_radius = batch_dist_set <= radius
-                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][filter_radius]
+                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][batch_dist_set <= radius]
 
             return knn_ind
         
