@@ -32,9 +32,11 @@ def euclid_batch(xxt, inner_queries, ddata_queries, i):
     return (xxt + inner_queries[i] - 2*ddata_queries[i])
 
 
-
 class build_snn_model:
-    def __init__( self, data, return_dist=False):
+    def __init__( self, data, return_dist=False, n_jobs=1, verbose=1):
+        self.n_jobs = n_jobs
+        self.verbose = verbose
+        
         self.mu = data.mean(axis=0)
         self.return_dist = return_dist
         data = data - self.mu
@@ -88,13 +90,13 @@ class build_snn_model:
         ddata_queries = np.inner(queries, self.data)
         # extend from self.data.dot(queries[0]), 2D array (n_samples, n_samples)
 
-        knn_ind = list()
+        knn_ind = dict()
         
         num = queries.shape[0]
         radius = radius**2
         
         if self.return_dist:
-            knn_dist = list()
+            knn_dist = dict()
             
             for i in range(num):
                 batch_dist_set = euclid_batch(self.xxt,
@@ -104,13 +106,11 @@ class build_snn_model:
                                              )[lefts[i]:rights[i]]
 
                 filter_radius = batch_dist_set <= radius
-                knn_ind.append(
-                    self.sort_id[lefts[i]:rights[i]][filter_radius]
-                )
+                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][filter_radius]
                 
-                knn_dist.append(
-                    np.sqrt(batch_dist_set[filter_radius])
-                )
+                
+                knn_dist[i] = np.sqrt(batch_dist_set[filter_radius])
+                
                 
             return knn_ind, knn_dist
 
@@ -123,9 +123,7 @@ class build_snn_model:
                                              )[lefts[i]:rights[i]]
 
                 filter_radius = batch_dist_set <= radius
-                knn_ind.append(
-                    self.sort_id[lefts[i]:rights[i]][filter_radius]
-                )
+                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][filter_radius]
 
             return knn_ind
         
