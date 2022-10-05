@@ -18,7 +18,6 @@
 
 
 
-
 import numpy as np
 from scipy.linalg import get_blas_funcs, eigh
     
@@ -27,9 +26,12 @@ def euclid(xxt, X, v):
     return (xxt + np.inner(v,v).ravel() -2*X.dot(v)).astype(float)
 
 
-
 def euclid_batch(xxt, inner_queries, ddata_queries, i):
     return (xxt + inner_queries[i] - 2*ddata_queries[i])
+
+
+def euclid_batch_mf(xxt, inner_queries, ddata_query, i):
+    return (xxt + inner_queries[i] - 2*ddata_query)
 
 
 class build_snn_model:
@@ -121,8 +123,59 @@ class build_snn_model:
                                               ddata_queries,
                                               i
                                              )[lefts[i]:rights[i]]
+
                 knn_ind[i] = self.sort_id[lefts[i]:rights[i]][batch_dist_set <= radius]
 
             return knn_ind
         
+        
+    def batch_query_radius_mf(self, queries, radius): # memory efficient
+        queries = np.subtract(queries, self.mu)
+        sv_qs = np.inner(queries, self.v)
+        lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
+        rights = np.searchsorted(self.sort_vals, sv_qs+radius)
+
+        inner_queries = np.einsum('ij,ij->i', queries, queries) 
+        # extend from np.inner(v,v).ravel(), 1D array
+
+        # ddata_queries = np.inner(queries, self.data)
+        # extend from self.data.dot(queries[0]), 2D array (n_samples, n_samples)
+
+        knn_ind = dict()
+        
+        num = queries.shape[0]
+        radius = radius**2
+        
+        if self.return_dist:
+            knn_dist = dict()
+            
+            for i in range(num):
+                ddata_query = self.data.dot(queries[i]) 
+                batch_dist_set = euclid_batch_mf(self.xxt,
+                                              inner_queries, 
+                                              ddata_query,
+                                              i
+                                             )[lefts[i]:rights[i]]
+
+                filter_radius = batch_dist_set <= radius
+                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][filter_radius]
+                
+                
+                knn_dist[i] = np.sqrt(batch_dist_set[filter_radius])
+                
+                
+            return knn_ind, knn_dist
+
+        else:
+            for i in range(num):
+                ddata_query = self.data.dot(queries[i]) 
+                batch_dist_set = euclid_batch_mf(self.xxt,
+                                              inner_queries, 
+                                              ddata_query,
+                                              i
+                                             )[lefts[i]:rights[i]]
+
+                knn_ind[i] = self.sort_id[lefts[i]:rights[i]][batch_dist_set <= radius]
+
+            return knn_ind
         
