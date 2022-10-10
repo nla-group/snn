@@ -142,7 +142,7 @@ X = rng.random_sample((n_samples, n_dim))
 snn_model = build_snn_model(X, return_dist=False)   
 
 # query data
-ind, dist = snn.query_radius(X[0], radius)
+ind = snn.radius_single_query(X[0], radius)
 
 sort_id = np.argsort(dist)
 
@@ -155,6 +155,12 @@ print("distance:", ", ".join([str(i) for i in dist[sort_id][:5]]))
 ```
 
 
+We also provide multi-query using BLAS-3 routine with single thread, simple call
+
+```
+# query data
+ind = snn.radius_batch_query(X[:10], radius) 
+```
 
 ### License
 All the content in this repository is licensed under the MIT License.
