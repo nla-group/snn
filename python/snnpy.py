@@ -63,7 +63,7 @@ class build_snn_model:
         self.xxt = np.einsum('ij,ij->i', self.data, self.data) # np.linalg.norm(X, axis=1)**2
     
 
-    def query_radius(self, query, radius):
+    def radius_single_query(self, query, radius):
         query = np.subtract(query, self.mu)
         sv_q = np.inner(query, self.v) 
         left = np.searchsorted(self.sort_vals, sv_q-radius)
@@ -79,8 +79,17 @@ class build_snn_model:
         else:
             return knn_ind
         
-
-    def batch_query_radius(self, queries, radius):
+        
+        
+    def radius_batch_query(self, queries, radius, memory_eff=0):
+        if memory_eff:
+            return self._radius_batch_query_mf(queries, radius)
+        
+        else:
+            return self._radius_batch_query(queries, radius)
+        
+        
+    def _radius_batch_query(self, queries, radius):
         queries = np.subtract(queries, self.mu)
         sv_qs = np.inner(queries, self.v)
         lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
@@ -129,7 +138,7 @@ class build_snn_model:
             return knn_ind
         
         
-    def batch_query_radius_mf(self, queries, radius): # memory efficient
+    def _radius_batch_query_mf(self, queries, radius): # memory efficient
         queries = np.subtract(queries, self.mu)
         sv_qs = np.inner(queries, self.v)
         lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
