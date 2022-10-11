@@ -158,7 +158,6 @@ print("distance:", ", ".join([str(i) for i in dist[sort_id][:5]]))
 We also provide multi-query using BLAS-3 routine with single thread (multithreading is under built), simple call:
 
 ```
-# query data
 ind = snn.radius_batch_query(X[:10], radius) 
 ```
 
