@@ -148,10 +148,6 @@ sort_id = np.argsort(dist)
 
 # return top 5
 print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
-
-# return top 10
-print("distance:", ", ".join([str(i) for i in dist[sort_id][:5]]))
-
 ```
 
 
