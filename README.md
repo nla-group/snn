@@ -139,10 +139,11 @@ rng = np.random.RandomState(0)
 X = rng.random_sample((n_samples, n_dim))  
 
 # index SNN model
-snn_model = build_snn_model(X, return_dist=False)   
+snn_model = build_snn_model(X, return_dist=True)  
+# will be faster if return_dist is False, then no distance information come out
 
 # query data
-ind = snn.radius_single_query(X[0], radius)
+ind, dist = snn.radius_single_query(X[0], radius)
 
 sort_id = np.argsort(dist)
 
