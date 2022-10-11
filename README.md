@@ -164,5 +164,5 @@ ind = snn.radius_batch_query(X[:10], radius)
 ### License
 All the content in this repository is licensed under the MIT License.
 
-Copyright © 2022 NLA group
+Copyright © 2022 [nla group](https://nla-group.org/)
 
