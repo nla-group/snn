@@ -25,6 +25,12 @@ After installation, you can just use ``include "snn.h"`` in your code, while com
 For example, you can use g++ with GSL BLAS and LAPACKE by ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
 
 
+For python users, you can also use native python implementation of SNN, simply install by:
+
+```sh
+pip install snnpy
+```
+
 ### User Guide
 
 SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
@@ -119,12 +125,6 @@ for (int j=0; j<2; j++){
 
 
 ### Python API
-
-You can also use python trivial implementation of SNN, simply install 
-
-```sh
-pip install snnpy
-```
 
 The example illustrates the use of SNN:
 
