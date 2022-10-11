@@ -154,7 +154,7 @@ print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
 
 We also provide multi-query using BLAS-3 routine with single thread (multithreading is under built), simple call:
 
-```
+```python
 ind = snn.radius_batch_query(X[:10], radius) 
 ```
 
