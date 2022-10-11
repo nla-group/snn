@@ -9,7 +9,7 @@ SNN is a fast exact radius neareast neighbor search algorithm. It uses singular 
 
 
 ### Installation
-SNN has dependencies on CBLAS, LAPACK and openMP, ensure install them before formally installing SNN. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/).
+SNN has dependencies on CBLAS, LAPACK and openMP, ensure install them before formally installing SNN. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can obtain further speedup).
 
 Install SNN simply by, please modify the ``CMakeList.txt`` file according to your LAPACK location.  
 ```sh
