@@ -66,7 +66,7 @@ double df[rows*cols] = {
 Then, we index the SNN model, specify the number of objects and feature dimensions in the data:
 ```c++
 // index SNN model
-SNN_MODEL<double, double> snn_model_Test(df, rows, cols);
+SNN_MODEL<double, double> snn_model_test(df, rows, cols);
 ```
 
 
@@ -82,7 +82,7 @@ vector<int> knnID;
 vector<double> knnDist; 
 
 // employ single query, the 0.4 refers to radius (range) 
-snn_model_Test.radius_single_query(query, 0.4, &knnID, &knnDist);
+snn_model_test.radius_single_query(query, 0.4, &knnID, &knnDist);
 ```
 
 
@@ -94,7 +94,7 @@ double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276
 vector<vector<int> > batch_knnID;
 vector<vector<double> > batch_knnDist;
 
-snn_model_Test.radius_batch_query(query_batch, 0.4, &batch_knnID, &batch_knnDist, 2);
+snn_model_test.radius_batch_query(query_batch, 0.4, &batch_knnID, &batch_knnDist, 2);
 
 for (int j=0; j<2; j++){
     cout << "knnID" << endl;
