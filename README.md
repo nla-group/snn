@@ -31,7 +31,43 @@ For python users, you can also use native python implementation of SNN, simply i
 pip install snnpy
 ```
 
-### User Guide
+
+### Python API
+
+The example illustrates the use of SNN:
+
+```python
+import numpy as np
+from snnpy import *
+
+n_samples = 500000
+n_dim =  100
+radius = 3.8
+rng = np.random.RandomState(0)
+X = rng.random_sample((n_samples, n_dim))  
+
+# index SNN model
+snn_model = build_snn_model(X, return_dist=True)  
+# will be faster if return_dist is False, then no distance information come out
+
+# query data
+ind, dist = snn.radius_single_query(X[0], radius)
+
+sort_id = np.argsort(dist)
+
+# return top 5
+print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
+```
+
+
+We also provide multi-query using BLAS-3 routine with single thread (multithreading is under built), simple call:
+
+```python
+ind = snn.radius_batch_query(X[:10], radius) 
+```
+
+
+### C++ API
 
 SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
 
@@ -123,40 +159,6 @@ for (int j=0; j<2; j++){
 */
 ```
 
-
-### Python API
-
-The example illustrates the use of SNN:
-
-```python
-import numpy as np
-from snnpy import *
-
-n_samples = 500000
-n_dim =  100
-radius = 3.8
-rng = np.random.RandomState(0)
-X = rng.random_sample((n_samples, n_dim))  
-
-# index SNN model
-snn_model = build_snn_model(X, return_dist=True)  
-# will be faster if return_dist is False, then no distance information come out
-
-# query data
-ind, dist = snn.radius_single_query(X[0], radius)
-
-sort_id = np.argsort(dist)
-
-# return top 5
-print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
-```
-
-
-We also provide multi-query using BLAS-3 routine with single thread (multithreading is under built), simple call:
-
-```python
-ind = snn.radius_batch_query(X[:10], radius) 
-```
 
 ### License
 All the content in this repository is licensed under the MIT License.
