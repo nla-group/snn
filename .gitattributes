@@ -1,5 +1,5 @@
-*.ipynb linguist-detectable=false
-*.cpp linguist-detectable=false
+*.ipynb linguist-detectable=true
+*.cpp linguist-detectable=true
 *.py linguist-detectable=true
-*.cmake linguist-detectable=false
-*.pyx linguist-detectable=false
+*.cmake linguist-detectable=true
+*.pyx linguist-detectable=true
