@@ -4,11 +4,11 @@
 [![!pypi](https://img.shields.io/pypi/v/snnpy?color=white)](https://pypi.org/project/snnpy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-SNN is a fast exact fixed-radius nearest neighbor search algorithm. It uses the first principal component of the data to reduce the search space and speeds up Euclidean distance computatations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. For completeness, there is also C++ implementation of SNN. 
+SNN is a fast exact fixed-radius nearest neighbor search algorithm. It uses the first principal component of the data to prune the search space and speeds up Euclidean distance computations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. There is also a C++ implementation of SNN. 
 
 ### Installation
 
-The native Python implementation of SNN can simply be installed by:
+The native Python implementation of SNN can be installed by:
 
 ```sh
 pip install snnpy
@@ -48,7 +48,7 @@ snn_model = build_snn_model(X, return_dist=True)
 # will be faster if return_dist is False, then no distance information come out
 
 # query data
-ind, dist = snn.radius_single_query(X[0], radius)
+ind, dist = radius_single_query(X[0], radius)
 
 sort_id = np.argsort(dist)
 
@@ -56,7 +56,7 @@ sort_id = np.argsort(dist)
 print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
 ```
 
-We also provide multi-querysupport exploiting single-threaded BLAS-3 (multi-threading is under development):
+We also provide multi-point query support exploiting single-threaded BLAS-3 (multi-threading is under development):
 
 ```python
 ind = snn.radius_batch_query(X[:10], radius) 
