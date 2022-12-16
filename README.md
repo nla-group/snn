@@ -1,24 +1,22 @@
-## SNN: A lightweight fast exact radius query algorithm
+## SNN: Exact fixed-radius nearest neighbor search
 
 [![C/C++ CI](https://github.com/nla-group/snn/actions/workflows/make.yml/badge.svg)](https://github.com/nla-group/snn/actions/workflows/make.yml)
 [![!pypi](https://img.shields.io/pypi/v/snnpy?color=white)](https://pypi.org/project/snnpy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-SNN is a fast exact radius neareast neighbor search algorithm. It uses singular value decomposition to reduce the search space and speedup euclidean calculation with BLAS level 2 routine.  SNN enjoys faster speed with native python implementation against KDtree and Balltree in scikit-learn package. In this repository, we open source the native Python and C++ code of SNN with simple Cmake installing procedure. 
-
-
+SNN is a fast exact fixed-radius nearest neighbor search algorithm. It uses the first principal component of the data to reduce the search space and speeds up Euclidean distance computatations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. For completeness, there is also C++ implementation of SNN. 
 
 ### Installation
 
-For Python users, you can also use native python implementation of SNN, simply install by:
+The native Python implementation of SNN can simply be installed by:
 
 ```sh
 pip install snnpy
 ```
 
-For C++ users, SNN has dependencies on CBLAS, LAPACK and openMP, ensure install them before formally installing SNN. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are also [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can obtain further speedup).
+The C++ version of SNN has dependencies on CBLAS, LAPACK and openMP. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can yield further speedup).
 
-Install SNN simply by, please modify the ``CMakeList.txt`` file according to your LAPACK location.  
+Please modify the ``CMakeList.txt`` file to reflect your LAPACK location:
 ```sh
 git clone https://github.com/nla-group/snn.git
 cd snn
@@ -28,14 +26,12 @@ cp *.a /usr/lib
 cp include/*.h /usr/include
 ```
 
-After installation, you can just use ``include "snn.h"`` in your code, while compile it simply by linking libsnn.a, CBLAS and LAPACK library. 
-For example, you can use g++ with GSL BLAS and LAPACKE by ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
-
-
+After installation, you can ``include "snn.h"`` in your code, and compile it by linking libsnn.a, CBLAS and LAPACK library. 
+For example, you can use g++ with GSL BLAS and LAPACK by typing ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
 
 ### Python API
 
-The example illustrates the use of SNN:
+Here is an example illustrating the use of SNN:
 
 ```python
 import numpy as np
@@ -60,8 +56,7 @@ sort_id = np.argsort(dist)
 print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
 ```
 
-
-We also provide multi-query using BLAS-3 routine with single thread (multithreading is under built), simple call:
+We also provide multi-querysupport exploiting single-threaded BLAS-3 (multi-threading is under development):
 
 ```python
 ind = snn.radius_batch_query(X[:10], radius) 
@@ -70,7 +65,7 @@ ind = snn.radius_batch_query(X[:10], radius)
 
 ### C++ API
 
-SNN has easy-to-use API, you can employ it on ``int``, ``float`` and ``double`` type data stored in column major order. The following is an example for loading the SNN and use the function. 
+SNN has an easy-to-use API, and it works with ``int``, ``float`` and ``double`` type data stored in column major order. 
 
 We fist prepare the data:
 ```c++
@@ -100,14 +95,14 @@ double df[rows*cols] = {
 *
 ```
 
-Then, we index the SNN model, specify the number of objects and feature dimensions in the data:
+Now we create the SNN model index, specify the number of objects and feature dimensions in the data:
 ```c++
 // index SNN model
 SNN_MODEL<double, double> snn_model_test(df, rows, cols);
 ```
 
 
-Query simple query as below:
+Querying neighbors of a single data point:
 ```c++
 // query data
 double query[cols] = {0.5488135 , 0.71518937, 0.60276338}; 
@@ -118,12 +113,12 @@ vector<int> knnID;
 // create the variable storing neighbors' distance to the query
 vector<double> knnDist; 
 
-// employ single query, the 0.4 refers to radius (range) 
+// employ single query, the number 0.4 refers to the search radius (range) 
 snn_model_test.radius_single_query(query, 0.4, &knnID, &knnDist);
 ```
 
 
-We can also query multiple objects:
+We can also query neighbors of multiple data points at once:
 ```c++
  // employ two queries, parallel compute by openMP
 double query_batch[2*cols] = {0.5488135, 0.944669, 0.71518937, 0.521848, 0.60276338, 0.414662};
