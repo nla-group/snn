@@ -59,7 +59,7 @@ print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
 We also provide multi-point query support exploiting single-threaded BLAS-3 (multi-threading is under development):
 
 ```python
-ind = snn.radius_batch_query(X[:10], radius) 
+ind = snn_model.radius_batch_query(X[:10], radius) 
 ```
 
 
@@ -155,9 +155,13 @@ for (int j=0; j<2; j++){
 */
 ```
 
-
 ### License
 All the content in this repository is licensed under the MIT License.
 
 Copyright © 2022 [nla group](https://nla-group.org/)
 
+
+## Reference
+
+[1] X. Chen and S. Güttel. Exact fixed-radius nearest neighbor search with an application to clustering, 
+    arXiv Preprint arXiv:2212.07679 (<https://arxiv.org/abs/2212.07679>), 2022.
