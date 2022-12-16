@@ -3,3 +3,4 @@
 *.py linguist-detectable=true
 *.cmake linguist-detectable=true
 *.pyx linguist-detectable=true
+*.ipynb linguist-detectable=False
