@@ -36,25 +36,54 @@ Here is an example illustrating the use of SNN:
 ```python
 import numpy as np
 from snnpy import *
+from time import time
 
-n_samples = 500000
+n_samples = 100000
 n_dim =  100
-radius = 3.8
+radius = 3.5
 rng = np.random.RandomState(0)
 X = rng.random_sample((n_samples, n_dim))  
 
-# index SNN model
+# build SNN model
+st = time()
 snn_model = build_snn_model(X, return_dist=True)  
+print("SNN index time:", time()-st)
 # will be faster if return_dist is False, then no distance information come out
 
-# query data
+# query neighbors of X[0]
+st = time()
 ind, dist = snn_model.radius_single_query(X[0], radius)
+sort_ind = np.argsort(dist)
+print("SNN query time:", time()-st)
 
-sort_id = np.argsort(dist)
+# print total number and top five indices
+print("number of neighbors:", len(ind))
+print("indices of closest five:", ", ".join([str(i) for i in ind[sort_ind][:5]]))
 
-# return top 5
-print("ID:", ", ".join([str(i) for i in ind[sort_id][:5]]))
+# EXAMPLE OUTPUT
+# SNN index time: 0.2224433422088623
+# SNN query time: 0.009207725524902344
+# number of neighbors: 550
+# indices of closest five: 0, 27279, 69983, 65906, 97095
 ```
+
+Compare this to sklearn's KDTree:
+
+```python
+from sklearn.neighbors import KDTree
+st = time()
+tree = KDTree(X)    
+print("KDTree index time:", time()-st)
+st = time()
+ind2 = tree.query_radius(X[0].reshape(1, -1), radius)
+print("KDTree query time:", time()-st)
+print("number of neighbors:", len(ind2[0]))
+
+# KDTree index time: 7.597502946853638
+# KDTree query time: 0.08962678909301758
+# number of neighbors: 550
+```
+
 
 We also provide multi-point query support exploiting single-threaded BLAS-3 (multi-threading is under development):
 
