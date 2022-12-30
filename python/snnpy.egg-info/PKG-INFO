@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: snnpy
-Version: 0.0.3
+Version: 0.0.4
 Summary: A lightweight fast exact radius query algorithm
 Home-page: https://github.com/nla-group/snn.git
 Author: Xinye Chen, Stefan Güttel
