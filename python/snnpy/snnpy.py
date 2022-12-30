@@ -79,12 +79,12 @@ class build_snn_model:
             return knn_ind
         
         
-    def radius_batch_query(self, queries, radius, memory_eff=0, return_dist=False):
+    def radius_batch_query(self, queries, radius, memory_eff=0, return_distance=False):
         if memory_eff:
-            return self._radius_batch_query_mf(queries, radius, return_dist)
+            return self._radius_batch_query_mf(queries, radius, return_distance)
         
         else:
-            return self._radius_batch_query(queries, radius, return_dist)
+            return self._radius_batch_query(queries, radius, return_distance)
         
         
     def _radius_batch_query(self, queries, radius, return_distance=False):
