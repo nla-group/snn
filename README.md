@@ -52,7 +52,7 @@ print("SNN index time:", time()-st)
 
 # query neighbors of X[0]
 st = time()
-ind, dist = snn_model.radius_single_query(X[0], radius)
+ind, dist = snn_model.query_radius(X[0], radius)
 sort_ind = np.argsort(dist)
 print("SNN query time:", time()-st)
 
