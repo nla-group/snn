@@ -8,7 +8,7 @@ with open("README.md", 'r') as f:
 setuptools.setup(
     name="snnpy",
     packages=["snnpy"],
-    version="0.0.3",
+    version="0.0.4",
     cmdclass={'build_ext': build_ext},
     setup_requires=["numpy"],
     install_requires=["numpy", "scipy"],
