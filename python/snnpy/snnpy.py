@@ -62,7 +62,7 @@ class build_snn_model:
         self.xxt = np.einsum('ij,ij->i', self.data, self.data) # np.linalg.norm(X, axis=1)**2
     
 
-    def radius_single_query(self, query, radius, return_dist=False):
+    def query_radius((self, query, radius, return_distance=False):
         query = np.subtract(query, self.mu)
         sv_q = np.inner(query, self.v) 
         left = np.searchsorted(self.sort_vals, sv_q-radius)
@@ -72,12 +72,11 @@ class build_snn_model:
         filter_radius = dist_set <= radius**2
         knn_ind = self.sort_id[left:right][filter_radius]
 
-        if return_dist:
+        if return_distance:
             knn_dist = np.sqrt(dist_set[filter_radius])
             return knn_ind, knn_dist
         else:
             return knn_ind
-        
         
         
     def radius_batch_query(self, queries, radius, memory_eff=0, return_dist=False):
@@ -88,7 +87,7 @@ class build_snn_model:
             return self._radius_batch_query(queries, radius, return_dist)
         
         
-    def _radius_batch_query(self, queries, radius, return_dist=False):
+    def _radius_batch_query(self, queries, radius, return_distance=False):
         queries = np.subtract(queries, self.mu)
         sv_qs = np.inner(queries, self.v)
         lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
@@ -105,7 +104,7 @@ class build_snn_model:
         num = queries.shape[0]
         radius = radius**2
         
-        if return_dist:
+        if return_distance:
             knn_dist = dict()
             
             for i in range(num):
@@ -137,7 +136,7 @@ class build_snn_model:
             return knn_ind
         
         
-    def _radius_batch_query_mf(self, queries, radius, return_dist=False): # memory efficient
+    def _radius_batch_query_mf(self, queries, radius, return_distance=False): # memory efficient
         queries = np.subtract(queries, self.mu)
         sv_qs = np.inner(queries, self.v)
         lefts = np.searchsorted(self.sort_vals, sv_qs-radius)
@@ -154,7 +153,7 @@ class build_snn_model:
         num = queries.shape[0]
         radius = radius**2
         
-        if return_dist:
+        if return_distance:
             knn_dist = dict()
             
             for i in range(num):
@@ -170,7 +169,6 @@ class build_snn_model:
                 
                 
                 knn_dist[i] = np.sqrt(batch_dist_set[filter_radius])
-                
                 
             return knn_ind, knn_dist
 
