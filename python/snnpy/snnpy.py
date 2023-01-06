@@ -136,7 +136,7 @@ def _radius_batch_query_mef(mu, v, xxt, sort_vals, sort_id, data, queries, radiu
     
     
 
-class build_snn_model_new:
+class build_snn_model:
     def __init__( self, data, n_jobs=1, verbose=1):
         self.n_jobs = n_jobs
         self.verbose = verbose
