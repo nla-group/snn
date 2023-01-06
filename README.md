@@ -46,13 +46,14 @@ X = rng.random_sample((n_samples, n_dim))
 
 # build SNN model
 st = time()
-snn_model = build_snn_model(X, return_dist=True)  
+snn_model = build_snn_model(X)  
 print("SNN index time:", time()-st)
 # will be faster if return_dist is False, then no distance information come out
 
 # query neighbors of X[0]
 st = time()
-ind, dist = snn_model.query_radius(X[0], radius)
+ind = snn_model.query_radius(X[0], radius, return_distance=False)
+# return the associated distance using: ind, dist = snn_model.query_radius(X[0], radius, return_distance=True)
 sort_ind = np.argsort(dist)
 print("SNN query time:", time()-st)
 
@@ -91,6 +92,7 @@ We also provide multi-point query support exploiting single-threaded BLAS-3 (mul
 ind = snn_model.radius_batch_query(X[:10], radius) 
 ```
 
+``snn_model.radius_batch_query`` uses Numba to obtain speedup. For the first-time run, Numba has to go through the function code and optimize the corresponding part, which requires extra overhead, and thus the function runs slowly. However, every subsequent time the batch query function will be much faster.
 
 ### C++ API
 
