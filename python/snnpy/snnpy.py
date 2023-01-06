@@ -184,4 +184,3 @@ class build_snn_model:
                                        self.sort_id, self.data, 
                                        queries, radius, return_distance)
         
-        
