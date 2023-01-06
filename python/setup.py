@@ -1,21 +1,28 @@
 import setuptools
-import numpy
 from setuptools.command.build_ext import build_ext
 
 with open("README.md", 'r') as f:
     long_description = f.read()
     
+
+class CustomBuildExtCommand(build_ext):
+    """build_ext command for use when numpy headers are needed."""
+
+    def run(self):
+        import numpy
+        self.include_dirs.append(numpy.get_include())
+        build_ext.run(self)
+        
 setuptools.setup(
     name="snnpy",
     packages=["snnpy"],
-    version="0.0.4",
-    cmdclass={'build_ext': build_ext},
+    version="0.0.5",
+    cmdclass={'build_ext': CustomBuildExtCommand},
     setup_requires=["numpy"],
-    install_requires=["numpy", "scipy"],
+    install_requires=["numpy", "scipy", "numba >= 0.51.2"],
     include_dirs=[numpy.get_include()],
     author="Xinye Chen, Stefan Güttel",
     maintainer="Xinye Chen, Stefan Güttel",
-    
     classifiers=["Intended Audience :: Science/Research",
                 "Intended Audience :: Developers",
                 "Programming Language :: Python",
