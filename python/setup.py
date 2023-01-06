@@ -18,7 +18,6 @@ setuptools.setup(
     packages=["snnpy"],
     version="0.0.5",
     cmdclass={'build_ext': CustomBuildExtCommand},
-    setup_requires=["numpy"],
     install_requires=["numpy", "scipy", "numba >= 0.51.2"],
     include_dirs=[numpy.get_include()],
     author="Xinye Chen, Stefan Güttel",
