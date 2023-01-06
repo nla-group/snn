@@ -62,7 +62,7 @@ class build_snn_model:
         self.xxt = np.einsum('ij,ij->i', self.data, self.data) # np.linalg.norm(X, axis=1)**2
     
 
-    def query_radius((self, query, radius, return_distance=False):
+    def query_radius(self, query, radius, return_distance=False):
         query = np.subtract(query, self.mu)
         sv_q = np.inner(query, self.v) 
         left = np.searchsorted(self.sort_vals, sv_q-radius)
