@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsnn.a  CMakeFiles/snn.dir/src/blasi.cpp.o CMakeFiles/snn.dir/src/eign.cpp.o CMakeFiles/snn.dir/src/snn.cpp.o
+/usr/bin/ranlib libsnn.a

@@ -1,0 +1,4 @@
+/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles/edit_cache.dir
+/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles/rebuild_cache.dir
+/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles/SNN.dir
+/home/chenxinye/Desktop/OPENMP_SNN/snn/CMakeFiles/snn.dir

@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: snnpy
+Version: 0.0.6
+Summary: A lightweight fast exact radius query algorithm
+Home-page: https://github.com/nla-group/snn.git
+Author: Xinye Chen, Stefan Güttel
+Author-email: xinye.chen@manchester.ac.uk, stefan.guettel@manchester.ac.uk
+Maintainer: Xinye Chen, Stefan Güttel
+Maintainer-email: xinye.chen@manchester.ac.uk, stefan.guettel@manchester.ac.uk
+License: MIT License
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+
+## SNN: A lightweight fast exact radius query algorithm
+
+### Install
+
+Install the SNN package simply by
+
+
+ ```python
+    pip install snnpy
+ ```
+
