@@ -42,3 +42,7 @@ then
                 mv glove-100-angular.hdf5 Angular_data/glove-100-angular.hdf5
                 mv deep-image-96-angular.hdf5 Angular_data/deep-image-96-angular.hdf5
 fi
+
+
+if $3; then
+        python hdf5_tonpy.py
