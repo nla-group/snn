@@ -1,5 +1,26 @@
 #!/bin/bash
 
+ADIR="/${PWD}/Angular_data/"
+EDIR="/${PWD}/Euclidean_data/"
+
+if [ -d "$ADIR" ]; then
+        echo "Download data in ${ADIR}..."
+else    
+        mkdir $ADIR
+        echo "Download data in ${ADIR}..."
+fi
+
+
+
+if [ -d "$EDIR" ]; then
+        echo "Download data in ${EDIR}..."
+else    
+        mkdir $EDIR
+        echo "Download data in ${EDIR}..."
+fi
+
+
+
 if [ "$1" = 1 ]
 then
         echo "Download Euclidean datasets."
@@ -26,6 +47,7 @@ then
                 if $2; then
                         mv glove-100-angular.hdf5 Angular_data/glove-100-angular.hdf5
                         mv deep-image-96-angular.hdf5 Angular_data/deep-image-96-angular.hdf5
+                fi
         fi
 elif [ "$1" = 0 ]
 then
