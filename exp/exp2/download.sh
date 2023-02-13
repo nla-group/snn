@@ -89,6 +89,7 @@ then
                 if $2; then
                         tar -xf siftsmall.tar.gz
                         tar -xf sift.tar.gz
+                        rm -rf siftsmall.tar.gz sift.tar.gz
                         mv fashion-mnist-784-euclidean.hdf5 Euclidean_data/fashion-mnist-784-euclidean.hdf5
                         mv siftsmall Euclidean_data/siftsmall
                         mv sift Euclidean_data/sift
