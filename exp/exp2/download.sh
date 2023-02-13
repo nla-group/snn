@@ -14,10 +14,10 @@ gistDIR="${EDIR}gist/"
 
 if [ -d "$ADIR" ]; then
         echo "Directory of Angular_data exists."
-        if [! -d "$deepDIR" ]; then
+        if [ ! -d "$deepDIR" ]; then
                 mkdir $deepDIR
         fi
-        if [! -d "$gloveDIR" ]; then
+        if [ ! -d "$gloveDIR" ]; then
                 mkdir $gloveDIR
         fi
 else
@@ -32,16 +32,16 @@ fi
 
 if [ -d "$EDIR" ]; then
         echo "Directory of Euclidean_data exists."
-        if [! -d "$fmnDIR" ]; then
+        if [ ! -d "$fmnDIR" ]; then
                 mkdir $fmnDIR
         fi
-        if [! -d "$siftDIR" ]; then
+        if [ ! -d "$siftDIR" ]; then
                 mkdir $siftDIR
         fi
-        if [! -d "$siftmDIR" ]; then
+        if [ ! -d "$siftmDIR" ]; then
                 mkdir $siftmDIR
         fi
-        if [! -d "$gistDIR" ]; then
+        if [ ! -d "$gistDIR" ]; then
                 mkdir $gistDIR
         fi
 else
