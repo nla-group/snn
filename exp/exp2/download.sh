@@ -3,20 +3,53 @@
 ADIR="/${PWD}/Angular_data/"
 EDIR="/${PWD}/Euclidean_data/"
 
+
+deepDIR="${ADIR}deep/"
+gloveDIR="${ADIR}glove/"
+fmnDIR="${EDIR}fashion_mnist/"
+siftDIR="${EDIR}sift/"
+siftmDIR="${EDIR}siftsmall/"
+gistDIR="${EDIR}gist/"
+
+
 if [ -d "$ADIR" ]; then
         echo "Download data in ${ADIR}..."
+        if [! -d "$deepDIR" ]; then
+                mkdir $deepDIR
+        fi
+        if [! -d "$gloveDIR" ]; then
+                mkdir $gloveDIR
 else    
         mkdir $ADIR
         echo "Download data in ${ADIR}..."
+        mkdir $deepDIR
+        mkdir $gloveDIR
 fi
 
 
 
 if [ -d "$EDIR" ]; then
         echo "Download data in ${EDIR}..."
+        fi
+        if [! -d "$fmnDIR" ]; then
+                mkdir $fmnDIR
+        fi
+        if [! -d "$siftDIR" ]; then
+                mkdir $siftDIR
+        fi
+        if [! -d "$siftmDIR" ]; then
+                mkdir $siftmDIR
+        fi
+        if [! -d "$gistDIR" ]; then
+                mkdir $gistDIR
+        fi
 else    
         mkdir $EDIR
         echo "Download data in ${EDIR}..."
+        mkdir $fmnDIR
+        mkdir $siftDIR
+        mkdir $siftmDIR
+        mkdir $gistDIR
 fi
 
 
