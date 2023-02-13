@@ -13,13 +13,15 @@ gistDIR="${EDIR}gist/"
 
 
 if [ -d "$ADIR" ]; then
-        echo "Download data in ${ADIR}..."
+        echo "Directory of Angular_data exists."
         if [! -d "$deepDIR" ]; then
                 mkdir $deepDIR
         fi
         if [! -d "$gloveDIR" ]; then
                 mkdir $gloveDIR
-else    
+        fi
+else
+        echo "Directory of Angular_data not found, create a new one."
         mkdir $ADIR
         echo "Download data in ${ADIR}..."
         mkdir $deepDIR
@@ -29,8 +31,7 @@ fi
 
 
 if [ -d "$EDIR" ]; then
-        echo "Download data in ${EDIR}..."
-        fi
+        echo "Directory of Euclidean_data exists."
         if [! -d "$fmnDIR" ]; then
                 mkdir $fmnDIR
         fi
@@ -43,7 +44,8 @@ if [ -d "$EDIR" ]; then
         if [! -d "$gistDIR" ]; then
                 mkdir $gistDIR
         fi
-else    
+else
+        echo "Directory of Euclidean_data not found, create a new one."
         mkdir $EDIR
         echo "Download data in ${EDIR}..."
         mkdir $fmnDIR
@@ -51,6 +53,7 @@ else
         mkdir $siftmDIR
         mkdir $gistDIR
 fi
+                                    
 
 
 
