@@ -4,17 +4,18 @@ Manual guide
 Dependencies
 ---------
 
-* scikit-learn - pip install -U scikit-learn: required in all exeriments in the paper for nearest search algorithms comparison
-* classix - pip install classixclustering: required in the experiment of the section 5.3 in the paper
+* scikit-learn - pip install -U scikit-learn: required in all experiments in the paper for nearest search algorithms comparison
+* classix - pip install classixclustering: required in the experiment of section 5.3 for the real-world clustering datasets in the paper
 
 
 
 
 Download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
 
-You can also use run shell scirpt ``download.sh`` to download the necessary datasets, use
+For the experiment in section 5.2, the datasets required to be downloaded additionally, you can also use run shell script ``download.sh`` to download the necessary datasets, use
 
 ```bash
+cd exp2
 sh download.sh 0 true true
 ```
 
