@@ -7,8 +7,6 @@ EDIR="/${PWD}/Euclidean_data/"
 deepDIR="${ADIR}deep/"
 gloveDIR="${ADIR}glove/"
 fmnDIR="${EDIR}fashion_mnist/"
-siftDIR="${EDIR}sift/"
-siftmDIR="${EDIR}siftsmall/"
 gistDIR="${EDIR}gist/"
 
 
@@ -23,7 +21,7 @@ if [ -d "$ADIR" ]; then
 else
         echo "Directory of Angular_data not found, create a new one."
         mkdir $ADIR
-        echo "Download data in ${ADIR}..."
+        # echo "Download data in ${ADIR}..."
         mkdir $deepDIR
         mkdir $gloveDIR
 fi
@@ -35,22 +33,14 @@ if [ -d "$EDIR" ]; then
         if [ ! -d "$fmnDIR" ]; then
                 mkdir $fmnDIR
         fi
-        if [ ! -d "$siftDIR" ]; then
-                mkdir $siftDIR
-        fi
-        if [ ! -d "$siftmDIR" ]; then
-                mkdir $siftmDIR
-        fi
         if [ ! -d "$gistDIR" ]; then
                 mkdir $gistDIR
         fi
 else
         echo "Directory of Euclidean_data not found, create a new one."
         mkdir $EDIR
-        echo "Download data in ${EDIR}..."
+        # echo "Download data in ${EDIR}..."
         mkdir $fmnDIR
-        mkdir $siftDIR
-        mkdir $siftmDIR
         mkdir $gistDIR
 fi
                                     
@@ -64,10 +54,11 @@ then
         wget ftp://ftp.irisa.fr/local/texmex/corpus/siftsmall.tar.gz
         wget ftp://ftp.irisa.fr/local/texmex/corpus/sift.tar.gz
         wget http://ann-benchmarks.com/gist-960-euclidean.hdf5
-        if [[ ! -z "$2" ]] ; then
+        if [ ! -z "$2" ] ; then
                 if $2; then
                         tar -xf siftsmall.tar.gz
                         tar -xf sift.tar.gz
+                        rm -rf siftsmall.tar.gz sift.tar.gz
                         mv fashion-mnist-784-euclidean.hdf5 Euclidean_data/fashion-mnist-784-euclidean.hdf5
                         mv siftsmall Euclidean_data/siftsmall
                         mv sift Euclidean_data/sift
@@ -79,7 +70,7 @@ then
         echo "Download Angular datasets."
         wget http://ann-benchmarks.com/glove-100-angular.hdf5
         wget http://ann-benchmarks.com/deep-image-96-angular.hdf5
-        if [[ ! -z "$2" ]] ; then
+        if [ ! -z "$2" ] ; then
                 if $2; then
                         mv glove-100-angular.hdf5 Angular_data/glove-100-angular.hdf5
                         mv deep-image-96-angular.hdf5 Angular_data/deep-image-96-angular.hdf5
@@ -94,7 +85,7 @@ then
         wget http://ann-benchmarks.com/gist-960-euclidean.hdf5
         wget http://ann-benchmarks.com/glove-100-angular.hdf5
         wget http://ann-benchmarks.com/deep-image-96-angular.hdf5
-        if [[ ! -z "$2" ]] ; then
+        if [ ! -z "$2" ] ; then
                 if $2; then
                         tar -xf siftsmall.tar.gz
                         tar -xf sift.tar.gz
