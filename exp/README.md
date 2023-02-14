@@ -29,7 +29,7 @@ You can download datasets manually from: http://corpus-texmex.irisa.fr/ and http
 After configuring the required datasets (by running ``~$ sh download.sh 0 true true``), then we run experimental programs that perform querying algorithms on the real-world datasets (without specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. 
 
 
-For the directory ``exp3``, it is to reproduce the clustering results in section 5.3 of the paper: run ``real_cluster.ipynb``. and then run the ``printinfo.ipynb`` to obtain the corresponding data for the experiment.
+For the directory ``exp3``, it is to reproduce the clustering results in section 5.3 of the paper: run ``real_cluster.ipynb``. and then run the ``printinfo.ipynb`` to obtain the corresponding data for the empirical result.
 
 
 
