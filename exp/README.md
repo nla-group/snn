@@ -23,7 +23,7 @@ sh download.sh 0 true true
 
 When the running complete, all required datasets will be downloaded as well as the associated transform will be performed.
 
-You can download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
+You can also download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
 
 
 After configuring the required datasets (by running ``~$ sh download.sh 0 true true``), then we run experimental programs that perform querying algorithms on the real-world datasets (without specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. 
