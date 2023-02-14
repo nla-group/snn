@@ -5,7 +5,7 @@ Dependencies
 ---------
 
 * scikit-learn - pip install -U scikit-learn: required in all experiments in the paper for nearest search algorithms comparison
-* [classixclustering]([https://github.com/nla-group/classix/tree/master/exp](https://github.com/nla-group/classix)) - pip install classixclustering: required in the experiment of section 5.3 for the real-world clustering datasets in the paper
+* [classixclustering](https://github.com/nla-group/classix) - pip install classixclustering: required in the experiment of section 5.3 for the real-world clustering datasets in the paper
 
 
 
