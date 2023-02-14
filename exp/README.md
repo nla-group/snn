@@ -8,7 +8,7 @@ Dependencies
 * [classixclustering](https://github.com/nla-group/classix) - pip install classixclustering: required in the experiment of section 5.3 for loading the real-world clustering datasets in the paper
 
 
-
+To run each the experiments in each section, we give the guide below. 
 
 For the directory ``exp1``, it is to reproduce the experimental results in section 5.1 of the paper: First run the ``parameter_test1.ipynb`` and ``parameter_test1.ipynb`` separately. Then run ``generate_plot.ipynb`` to generate the figures corresponding to the paper. 
 
@@ -21,9 +21,7 @@ cd exp2
 sh download.sh 0 true true
 ```
 
-When the running complete, all required datasets will be downloaded as well as the associated transform will be performed.
-
-You can also download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
+When the running complete, all required datasets will be downloaded as well as the associated transform will be performed. You can also download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
 
 
 After configuring the required datasets (by running ``~$ sh download.sh 0 true true``), then we run experimental programs that perform querying algorithms on the real-world datasets (without specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. Then run the ``printinfo.ipynb`` to obtain the corresponding data for the empirical result.
