@@ -28,7 +28,7 @@ sh download.sh 0 true true
 
 You can also download datasets manually from http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
 
-The experiments are now reproduced by running the notebooks (in no specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. 
+The experiments are now reproduced by running the notebooks (in no particular order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. 
 
 Then run the ``printinfo.ipynb`` to obtain summary tables from the paper.
 
