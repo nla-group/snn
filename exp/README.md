@@ -1,33 +1,40 @@
-Manual guide
+Guide to reproduce all paper experiments
 ---------------------
+
+Below we explain how to reproduce each experiment in the paper "Fast and exact fixed-radius neighbor search based on sorting" (X. Chen and S. Güttel, 2023).
 
 Dependencies
 ---------
 
-* scikit-learn - pip install -U scikit-learn: required in all experiments in the paper for nearest search algorithms comparison
-* [classixclustering](https://github.com/nla-group/classix) - pip install classixclustering: required in the experiment of section 5.3 for loading the real-world clustering datasets in the paper
+* scikit-learn - `pip install -U scikit-learn`: required in all experiments in the paper whenever we compare against other nearest neighbor search algorithms 
+* [classixclustering](https://github.com/nla-group/classix) - `pip install classixclustering`: only required for the experiment of section 5.3 for loading the real-world clustering datasets 
 
+Experiments 
+-------------
 
-To run each the experiments in each section, we give the guide below. 
+The experiments in each section of the paper are reproduced as detailed below.
 
-For the directory ``exp1``, it is to reproduce the experimental results in section 5.1 of the paper: First run the ``parameter_test1.ipynb`` and ``parameter_test1.ipynb`` separately. Then run ``generate_plot.ipynb`` to generate the figures corresponding to the paper. 
+### Section 6.1 and 6.2
 
-For the directory ``exp2``, it is to reproduce the experimental results in section 5.2 of the paper: 
+The directory ``exp1`` contains code to reproduce the results in section 6.1 and 6.2: First run ``parameter_test1.ipynb`` and ``parameter_test1.ipynb`` separately. Then run ``generate_plot.ipynb`` to generate the figures of the paper. 
 
-For the experiment in section 5.2, the datasets required to be downloaded additionally, you can also use run shell script ``download.sh`` to download the necessary datasets, use
+### Section 6.3
 
+The directory ``exp2`` contains code to reproduce the results in section 6.3: First the datasets need to be downloaded, and this can be done using the shell script ``download.sh`` via
 ```bash
 cd exp2
 sh download.sh 0 true true
 ```
 
-When the running complete, all required datasets will be downloaded as well as the associated transform will be performed. You can also download datasets manually from: http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
+You can also download datasets manually from http://corpus-texmex.irisa.fr/ and https://github.com/erikbern/ann-benchmarks/
 
+The experiments are now reproduced by running the notebooks (in no specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. 
 
-After configuring the required datasets (by running ``~$ sh download.sh 0 true true``), then we run experimental programs that perform querying algorithms on the real-world datasets (without specific order): ``angular_deep1b1.ipynb``, ``angular_deep1b2.ipynb``, ``angular_deep1b3.ipynb``, ``angular_deep1b4.ipynb``, ``angular_deep1b5.ipynb``, ``angular_glove.ipynb``,  ``euclidean_fmn.ipynb``, ``euclidean_gist.ipynb``, ``euclidean_sifts.ipynb``, ``euclidean_siftsmall.ipynb``. Then run the ``printinfo.ipynb`` to obtain the corresponding data for the empirical result.
+Then run the ``printinfo.ipynb`` to obtain summary tables from the paper.
 
+### Section 6.4
 
-For the directory ``exp3``, it is to reproduce the clustering results in section 5.3 of the paper: run ``real_cluster.ipynb``. and then run the ``printinfo.ipynb`` to obtain the corresponding data for the empirical result.
+The directory ``exp3`` contains code to reproduce the clustering results in section 6.4: run ``real_cluster.ipynb``. Then run ``printinfo.ipynb`` to produce the summaries from the paper.
 
 
 
