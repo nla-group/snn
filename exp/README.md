@@ -1,13 +1,15 @@
-Guide to reproduce all paper experiments
+Guide to reproduce all experiments
 ---------------------
 
-Below we explain how to reproduce each experiment in the paper "Fast and exact fixed-radius neighbor search based on sorting" (X. Chen and S. Güttel, 2023).
+Below we explain how to reproduce each experiment in the SNN paper "Fast and exact fixed-radius neighbor search based on sorting" (X. Chen and S. Güttel, 2023).
 
 Dependencies
 ---------
 
-* scikit-learn - `pip install -U scikit-learn`: required in all experiments in the paper whenever we compare against other nearest neighbor search algorithms 
-* [classixclustering](https://github.com/nla-group/classix) - `pip install classixclustering`: only required for the experiment of section 5.3 for loading the real-world clustering datasets 
+* SNN - `pip install snnpy`
+* scikit-learn - `pip install -U scikit-learn`: required in all experiments in the paper whenever we compare against other nearest neighbor search algorithms
+* GriSPy - `pip install grispy`: for the comparison in Section 6.2
+* [classixclustering](https://github.com/nla-group/classix) - `pip install classixclustering`: only required for the experiment of section 6.3 to load the real-world clustering datasets 
 
 Experiments 
 -------------
@@ -16,11 +18,11 @@ The experiments in each section of the paper are reproduced as detailed below.
 
 ### Section 6.1 and 6.2
 
-The directory ``exp1`` contains code to reproduce the results in section 6.1 and 6.2: First run ``parameter_test1.ipynb`` and ``parameter_test1.ipynb`` separately. Then run ``generate_plot.ipynb`` to generate the figures of the paper. 
+The directory ``exp1`` contains code to reproduce the results in Section 6.1 and 6.2: First run ``parameter_test1.ipynb`` and ``parameter_test1.ipynb`` separately. Then run ``generate_plot.ipynb`` to generate the figures of the paper. 
 
 ### Section 6.3
 
-The directory ``exp2`` contains code to reproduce the results in section 6.3: First the datasets need to be downloaded, and this can be done using the shell script ``download.sh`` via
+The directory ``exp2`` contains code to reproduce the results in Section 6.3: First the datasets need to be downloaded, and this can be done using the shell script ``download.sh`` via
 ```bash
 cd exp2
 sh download.sh 0 true true
@@ -34,7 +36,7 @@ Then run the ``printinfo.ipynb`` to obtain summary tables from the paper.
 
 ### Section 6.4
 
-The directory ``exp3`` contains code to reproduce the clustering results in section 6.4: run ``real_cluster.ipynb``. Then run ``printinfo.ipynb`` to produce the summaries from the paper.
+The directory ``exp3`` contains code to reproduce the clustering results in Section 6.4: run ``real_cluster.ipynb``. Then run ``printinfo.ipynb`` to produce the summaries from the paper.
 
 
 
