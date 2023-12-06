@@ -10,28 +10,13 @@ SNN is a fast and exact fixed-radius nearest neighbor search algorithm [1]. It u
 
 To reproduce the experiments from the paper [1], see the instructions and code in the `exp` subfolder.
 
-### Installation
+### Python installation
 
 The native Python implementation of SNN can be installed by:
 
 ```sh
 pip install snnpy
 ```
-
-The C++ version of SNN has dependencies on CBLAS, LAPACK and openMP. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can yield further speedup).
-
-Please modify the ``CMakeList.txt`` file to reflect your LAPACK location:
-```sh
-git clone https://github.com/nla-group/snn.git
-cd snn
-cmake . # or mkdir build -> cd build -> cmake ../
-make 
-cp *.a /usr/lib
-cp include/*.h /usr/include
-```
-
-After installation, you can ``include "snn.h"`` in your code, and compile it by linking libsnn.a, CBLAS and LAPACK library. 
-For example, you can use g++ with GSL BLAS and LAPACK by typing ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
 
 ### Python API
 
@@ -98,11 +83,28 @@ ind = snn_model.radius_batch_query(X[:10], radius)
 
 ``snn_model.radius_batch_query`` uses Numba to obtain speedup. For the first-time run, Numba has to go through the function code and optimize the corresponding part, which requires extra overhead, and thus the function runs slowly. However, every subsequent time the batch query function will be much faster.
 
+### C++ installation
+
+The C++ version of SNN has dependencies on CBLAS, LAPACK and openMP. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can yield further speedup).
+
+Please modify the ``CMakeList.txt`` file to reflect your LAPACK location:
+```sh
+git clone https://github.com/nla-group/snn.git
+cd snn
+cmake . # or mkdir build -> cd build -> cmake ../
+make 
+cp *.a /usr/lib
+cp include/*.h /usr/include
+```
+
+After installation, you can ``include "snn.h"`` in your code, and compile it by linking the libsnn.a, CBLAS and LAPACK libraries. 
+For example, you can use g++ with GSL BLAS and LAPACK by typing ``g++ your_code.cpp libsnn.a -o output -llapacke -lgslcblas -lm -W`` in Ubuntu.
+
 ### C++ API
 
-SNN has an easy-to-use API, and it works with ``int``, ``float`` and ``double`` type data stored in column major order. 
+SNN has an easy-to-use API, and it works with ``int``, ``float`` and ``double`` data types stored in column major order. 
 
-We fist prepare the data:
+We first prepare the data:
 ```c++
 int rows = 10;
 int cols = 3;
@@ -130,12 +132,11 @@ double df[rows*cols] = {
 *
 ```
 
-Now we create the SNN model index, specify the number of objects and feature dimensions in the data:
+Now we create the SNN index, specifying the number of objects and feature dimensions in the data:
 ```c++
 // index SNN model
 SNN_MODEL<double, double> snn_model_test(df, rows, cols);
 ```
-
 
 Querying neighbors of a single data point:
 ```c++
@@ -151,7 +152,6 @@ vector<double> knnDist;
 // employ single query, the number 0.4 refers to the search radius (range) 
 snn_model_test.radius_single_query(query, 0.4, &knnID, &knnDist);
 ```
-
 
 We can also query neighbors of multiple data points at once:
 ```c++
