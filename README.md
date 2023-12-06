@@ -75,13 +75,13 @@ print("number of neighbors:", len(ind2[0]))
 ```
 
 
-We also provide multi-point query support exploiting single-threaded BLAS-3 (multi-threading is under development):
+We also support multi-point queries which exploit single-threaded BLAS-3 (multi-threading is under development):
 
 ```python
 ind = snn_model.radius_batch_query(X[:10], radius) 
 ```
 
-``snn_model.radius_batch_query`` uses Numba to obtain speedup. For the first-time run, Numba has to go through the function code and optimize the corresponding part, which requires extra overhead, and thus the function runs slowly. However, every subsequent time the batch query function will be much faster.
+``snn_model.radius_batch_query`` uses Numba for further speedup. For the first run, Numba has to go through the code and optimize it, adding extra overhead. Each subsequent run of batch queries will be much faster.
 
 ### C++ installation
 
