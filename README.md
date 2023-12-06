@@ -1,10 +1,14 @@
-## SNN: Exact fixed-radius nearest neighbor search
+## SNN: Fast and exact fixed-radius neighbor search
 
 [![C/C++ CI](https://github.com/nla-group/snn/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/nla-group/snn/actions/workflows/c-cpp.yml)
 [![!pypi](https://img.shields.io/pypi/v/snnpy?color=white)](https://pypi.org/project/snnpy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-SNN is a fast exact fixed-radius nearest neighbor search algorithm [1]. It uses the first principal component of the data to prune the search space and speeds up Euclidean distance computations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. There is also a C++ implementation of SNN. 
+SNN is a fast and exact fixed-radius nearest neighbor search algorithm [1]. It uses the first principal component of the data to prune the search space and speeds up Euclidean distance computations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. There is also a C++ implementation of SNN. 
+
+### Reproducibility
+
+To reproduce the experiments from the paper [1], see the instructions and code in the `exp` subfolder.
 
 ### Installation
 
@@ -192,5 +196,5 @@ All the content in this repository is licensed under the MIT License.
 
 ## Reference
 
-[1] X. Chen and S. Güttel. Exact fixed-radius nearest neighbor search with an application to clustering, 
-    arXiv Preprint 2212.07679 (<https://arxiv.org/abs/2212.07679>), 2022.
+[1] X. Chen and S. Güttel. Fast and exact fixed-radius neighbor search based on sorting, 
+    arXiv preprint 2212.07679 (<https://arxiv.org/abs/2212.07679>), 2023.
