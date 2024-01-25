@@ -16,7 +16,7 @@ class CustomBuildExtCommand(build_ext):
 setuptools.setup(
     name="snnpy",
     packages=["snnpy"],
-    version="0.0.6",
+    version="0.0.7",
     cmdclass={'build_ext': CustomBuildExtCommand},
     setup_requires=["numpy"],
     install_requires=["numpy", "scipy", "numba >= 0.51.2"],
