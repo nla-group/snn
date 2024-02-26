@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/SNN.dir/runtest.cpp.o  -o SNN  libsnn.a /usr/lib/x86_64-linux-gnu/liblapacke.so /usr/lib/x86_64-linux-gnu/libgslcblas.so /usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.so 

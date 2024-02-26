@@ -89,12 +89,13 @@ ind = snn_model.radius_batch_query(X[:10], radius)
 
 The C++ version of SNN has dependencies on CBLAS, LAPACK and openMP. Reference LAPACK is [available from GitHub](https://github.com/Reference-LAPACK/lapack). LAPACK releases are [available on netlib](http://www.netlib.org/lapack/) (using [MKL](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) can yield further speedup).
 
-Please modify the ``CMakeList.txt`` file to reflect your LAPACK location:
+Please modify the ``CMakeList.txt`` file to reflect your LAPACK location.
+If `liblpacke-dev` as well as `libopenblas-dev` were installed using your package manager (for example `apt`) there is no need to further modify the `CMakeLists.txt`.
 ```sh
 git clone https://github.com/nla-group/snn.git
 cd snn
-cmake . # or mkdir build -> cd build -> cmake ../
-make 
+cmake -S . -B ./build/
+cmake --build ./build/ 
 cp *.a /usr/lib
 cp include/*.h /usr/include
 ```
