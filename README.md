@@ -197,17 +197,7 @@ All the content in this repository is licensed under the MIT License.
 
 
 ## Reference
-```bibtex
-@article{CG24b,
-  title   = {Fast and exact fixed-radius neighbor search based on sorting},
-  author  = {Chen, Xinye and G\"{u}ttel, Stefan},
-  year    = {2024},
-  volume  = {},
-  number  = {},
-  pages   = {},
-  journal = {To appear in PeerJ Computer Science},
-  url     = {https://arxiv.org/abs/2212.07679},
-  webpdf  = {https://arxiv.org/abs/2212.07679}
-}
+
+Chen X, Güttel S. 2024. Fast and exact fixed-radius neighbor search based on sorting. PeerJ Computer Science 10:e1929 https://doi.org/10.7717/peerj-cs.1929
 ```
 
