@@ -4,7 +4,7 @@ from time import time
 
 n_samples = 100000
 n_dim =  100
-radius = 2
+radius = 1.5
 rng = np.random.RandomState(0)
 X = rng.random_sample((n_samples, n_dim))  
 
@@ -16,8 +16,8 @@ print("SNN index time:", time()-st)
 
 # query neighbors of X[0]
 st = time()
-for i in range(100):
-    ind, dist = snn_model.query_radius(X[2050+i], radius, return_distance=True)
+for i in range(1000):
+    ind, dist = snn_model.query_radius(X[1050+i], radius, return_distance=True)
 # If remove the returning of the associated distance, use: ind, dist = snn_model.query_radius(X[0], radius, return_distance=False)
 # sort_ind = np.argsort(dist)
 print(ind)
@@ -37,18 +37,10 @@ print("SNN query time:", time()-st)
 # test new
 st = time()
 snn_model = build_snn_model(X)
-print("SNN 2 index time:", time()-st)
+print("SNN index time:", time()-st)
 st = time()
-results = snn_model.batch_query_radius1(X[2050:(2050+100)], radius)
+results = snn_model.batch_query_radius(X[1050:(1050+1000)], radius)
 print(results[-1])
-print("SNN 2 query time:", time()-st)
+print("SNN query time:", time()-st)
 
 
-# test new
-st = time()
-snn_model = build_snn_model(X)
-print("SNN 3 index time:", time()-st)
-st = time()
-results = snn_model.batch_query_radius2(X[2050:(2050+100)], radius)
-print(results[-1])
-print("SNN 3 query time:", time()-st)

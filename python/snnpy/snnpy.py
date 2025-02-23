@@ -1,8 +1,6 @@
-# import numba
+
 import numpy as np
 from scipy.linalg import get_blas_funcs, eigh
-
-
 
 
 class build_snn_model:
@@ -49,48 +47,11 @@ class build_snn_model:
             return knn_ind
         
     
-    def batch_query_radius1(self, queries, r, return_distance=False):
-        """
-        Efficiently handles multiple queries at once.
-        - queries: (m, d) array of query points
-        - r: radius for nearest neighbors
-        - return_distance: if True, also returns distances
-        """
-        queries = queries - self.mu  # Center queries
-        sv_q = queries @ self.v  # (m,) projections of queries onto PC
-        left = np.searchsorted(self.sort_vals, sv_q - r, side='left')
-        right = np.searchsorted(self.sort_vals, sv_q + r, side='right')
-
-        # Compute squared norms of queries
-        queries_xxt = np.sum(queries**2, axis=1)
-
-        results = []
-        distances = []
-
-        r = r**2
-        for i in range(queries.shape[0]):  # Iterate over multiple queries
-            idx_range = slice(left[i], right[i])
-            data_subset = self.data[idx_range]
-            xxt_subset = self.xxt[idx_range]
-
-            # Compute squared distances efficiently
-            dists = xxt_subset + queries_xxt[i] - 2 * np.dot(data_subset, queries[i])
-            mask = dists <= r  # Radius filter
-            knn_idx = self.sort_id[idx_range][mask]
-            
-            results.append(knn_idx)
-            if return_distance:
-                distances.append(np.sqrt(dists[mask]))
-
-        return (results, distances) if return_distance else results
-    
-
-    def batch_query_radius2(self, queries, r, return_distance=False):
+    def batch_query_radius(self, queries, r, return_distance=False):
         queries = queries - self.mu
-        sv_q = queries @ self.v  # Project all queries onto principal component
+        sv_q = queries @ self.v  
         r_sq = r ** 2
 
-        # Use searchsorted in a vectorized manner
         left = np.searchsorted(self.sort_vals, sv_q - r)
         right = np.searchsorted(self.sort_vals, sv_q + r)
 
@@ -114,5 +75,6 @@ class build_snn_model:
     
 
 def euclid(xxt, X, v):
-    return (xxt + np.inner(v,v).ravel() -2*X.dot(v)).astype(float)
+    return (xxt + np.inner(v, v).ravel() -2*X.dot(v)).astype(float)
+
 
