@@ -74,15 +74,6 @@ print("number of neighbors:", len(ind2[0]))
 # number of neighbors: 550
 ```
 
-
-We also support multi-point queries which exploit single-threaded BLAS-3 (multi-threading is under development):
-
-```python
-ind = snn_model.radius_batch_query(X[:10], radius) 
-```
-
-``snn_model.radius_batch_query`` uses Numba for further speedup. For the first run, Numba has to go through the code and optimize it, adding extra overhead. Each subsequent run of batch queries will be much faster.
-
 ### License
 All the content in this repository is licensed under the MIT License. 
 
