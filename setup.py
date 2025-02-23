@@ -1,12 +1,12 @@
 import setuptools
-import pybind11
+from pybind11.setup_helpers import Pybind11Extension, build_ext
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
 with open("README.md", 'r') as f:
     long_description = f.read()
     
-
+__version__ = "0.0.8"
 class CustomBuildExtCommand(build_ext):
     """build_ext command for use when numpy headers are needed."""
 
@@ -15,12 +15,10 @@ class CustomBuildExtCommand(build_ext):
         self.include_dirs.append(numpy.get_include())
         build_ext.run(self)
     
-
-
-snn_module = Extension(
+snn_module = Pybind11Extension(
     'snnomp',
     sources=['snnpy/snnpy.cpp'],
-    include_dirs=[pybind11.get_include()],
+    define_macros=[("VERSION_INFO", __version__)],
     extra_compile_args=['-fopenmp', '-O3'],
     extra_link_args=['-fopenmp', '-lblas'],
     language='c++',
@@ -30,11 +28,11 @@ snn_module = Extension(
 setuptools.setup(
     name="snnpy",
     packages=["snnpy"],
-    version="0.0.8",
+    version=__version__,
     cmdclass={'build_ext': CustomBuildExtCommand},
-    setup_requires=["numpy", "pybind11"],
+    setup_requires=["numpy", "pybind11>=2.2"],
     ext_modules=[snn_module],
-    install_requires=["numpy", "scipy", "pybind11"],
+    install_requires=["numpy", "scipy", "pybind11>=2.2"],
     author="Xinye Chen, Stefan Güttel",
     maintainer="Xinye Chen, Stefan Güttel",
     classifiers=["Intended Audience :: Science/Research",

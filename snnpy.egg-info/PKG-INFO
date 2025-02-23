@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: snnpy
 Version: 0.0.8
 Summary: A lightweight fast exact radius query algorithm
@@ -22,6 +22,20 @@ Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: pybind11>=2.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: requires-dist
+Dynamic: summary
 
 ## SNN: Fast and exact fixed-radius neighbor search
 
@@ -45,9 +59,7 @@ The native Python implementation of SNN can be installed by:
 pip install snnpy
 ```
 
-### Python API
-
-Here is an example illustrating the use of SNN:
+### Usage
 
 ```python
 import numpy as np
