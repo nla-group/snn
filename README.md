@@ -20,9 +20,7 @@ The native Python implementation of SNN can be installed by:
 pip install snnpy
 ```
 
-### Python API
-
-Here is an example illustrating the use of SNN:
+### Usage
 
 ```python
 import numpy as np
