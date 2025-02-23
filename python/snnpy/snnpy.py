@@ -1,11 +1,12 @@
-import numba
+# import numba
 import numpy as np
 from scipy.linalg import get_blas_funcs, eigh
 
 
+
+
 class build_snn_model:
-    def __init__( self, data, n_jobs=1, verbose=1):
-        self.n_jobs = n_jobs
+    def __init__( self, data, verbose=1):
         self.verbose = verbose
         
         self.mu = data.mean(axis=0)
@@ -47,119 +48,71 @@ class build_snn_model:
         else:
             return knn_ind
         
+    
+    def batch_query_radius1(self, queries, r, return_distance=False):
+        """
+        Efficiently handles multiple queries at once.
+        - queries: (m, d) array of query points
+        - r: radius for nearest neighbors
+        - return_distance: if True, also returns distances
+        """
+        queries = queries - self.mu  # Center queries
+        sv_q = queries @ self.v  # (m,) projections of queries onto PC
+        left = np.searchsorted(self.sort_vals, sv_q - r, side='left')
+        right = np.searchsorted(self.sort_vals, sv_q + r, side='right')
+
+        # Compute squared norms of queries
+        queries_xxt = np.sum(queries**2, axis=1)
+
+        results = []
+        distances = []
+
+        r = r**2
+        for i in range(queries.shape[0]):  # Iterate over multiple queries
+            idx_range = slice(left[i], right[i])
+            data_subset = self.data[idx_range]
+            xxt_subset = self.xxt[idx_range]
+
+            # Compute squared distances efficiently
+            dists = xxt_subset + queries_xxt[i] - 2 * np.dot(data_subset, queries[i])
+            mask = dists <= r  # Radius filter
+            knn_idx = self.sort_id[idx_range][mask]
             
+            results.append(knn_idx)
+            if return_distance:
+                distances.append(np.sqrt(dists[mask]))
 
-    def radius_batch_query(self, queries, r, return_distance=False, memory_eff=0):
-        if memory_eff:
-            return _r_batch_query_mef(self.mu, 
-                                       self.v, 
-                                       self.xxt, 
-                                       self.sort_vals, 
-                                       self.sort_id, self.data, 
-                                       queries, r, return_distance)
-            
-        else:
-            return _r_batch_query(self.mu, 
-                                       self.v, 
-                                       self.xxt, 
-                                       self.sort_vals, 
-                                       self.sort_id, self.data, 
-                                       queries, r, return_distance)
-        
-        
-        
-
-def _r_batch_query(mu, v, xxt, sort_vals, sort_id, data, queries, r, return_distance=False):
-    queries, lefts, rights = bisection_sort(queries, mu, v, sort_vals, r)
-    inner_queries = np.einsum('ij,ij->i', queries, queries) 
-    knn_ind = dict()
-    r = r**2
-    
-    if return_distance:
-        return query_batches_dist(queries, data, inner_queries, xxt, r, lefts, rights, sort_id)
-
-    else:
-        return query_batches(queries, data, inner_queries, xxt, r, lefts, rights, sort_id)
-    
+        return (results, distances) if return_distance else results
     
 
-def _r_batch_query_mef(mu, v, xxt, sort_vals, sort_id, data, queries, r, return_distance=False):
-    queries, lefts, rights = bisection_sort(queries, mu, v, sort_vals, r)
-    inner_queries = np.einsum('ij,ij->i', queries, queries) 
-    knn_ind = dict()
-    r = r**2
+    def batch_query_radius2(self, queries, r, return_distance=False):
+        queries = queries - self.mu
+        sv_q = queries @ self.v  # Project all queries onto principal component
+        r_sq = r ** 2
+
+        # Use searchsorted in a vectorized manner
+        left = np.searchsorted(self.sort_vals, sv_q - r)
+        right = np.searchsorted(self.sort_vals, sv_q + r)
+
+        results = []
+        distances = []
+
+        for i in range(len(queries)):
+            idx_range = slice(left[i], right[i])
+            dist_sq = self.xxt[idx_range] + np.sum(queries[i] ** 2) - 2 * (self.data[idx_range] @ queries[i])
+
+            mask = dist_sq <= r_sq
+            indices = self.sort_id[idx_range][mask]
+
+            if return_distance:
+                results.append(indices)
+                distances.append(np.sqrt(dist_sq[mask]))
+            else:
+                results.append(indices)
+
+        return (results, distances) if return_distance else results
     
-    if return_distance:
-        return query_batches_dist_mef(queries, data, inner_queries, xxt, r, lefts, rights, sort_id)
 
-    else:
-        return query_batches_mef(queries, data, inner_queries, xxt, r, lefts, rights, sort_id)
-    
-
-@numba.njit(cache=False)
-def query_batches(queries, data, inner_queries, xxt, r, lefts, rights, sort_id):
-    knn_ind = dict()
-    ddata_queries = np.dot(queries, data.T)
-    for i in range(queries.shape[0]):
-        batch_dist_set = (xxt + inner_queries[i] - 2*ddata_queries[i])
-
-        batch_dist_set = batch_dist_set[lefts[i]:rights[i]]
-        knn_ind[i] = sort_id[lefts[i]:rights[i]][batch_dist_set <= r]
-    
-    return knn_ind
-
-@numba.njit(cache=False)
-def query_batches_dist(queries, data, inner_queries, xxt, r, lefts, rights, sort_id):
-    knn_ind = dict()
-    knn_dist = dict()
-    ddata_queries = np.dot(queries, data.T)
-    for i in range(queries.shape[0]):
-        batch_dist_set = (xxt + inner_queries[i] - 2*ddata_queries[i])
-
-        batch_dist_set = batch_dist_set[lefts[i]:rights[i]]
-
-        filter_r = batch_dist_set <= r
-        knn_ind[i] = sort_id[lefts[i]:rights[i]][filter_r]
-        knn_dist[i] = np.sqrt(batch_dist_set[filter_r])
-        
-    return knn_ind, knn_dist
-
-
-@numba.njit(cache=False)
-def query_batches_mef(queries, data, inner_queries, xxt, r, lefts, rights, sort_id):
-    knn_ind = dict()
-    
-    for i in range(queries.shape[0]):
-        ddata_query = np.dot(data[lefts[i]:rights[i]], queries[i])
-        batch_dist_set = (xxt[lefts[i]:rights[i]] + inner_queries[i] - 2*ddata_query)
-        knn_ind[i] = sort_id[lefts[i]:rights[i]][batch_dist_set <= r]
-    
-    return knn_ind
-
-
-@numba.njit(cache=False)
-def query_batches_dist_mef(queries, data, inner_queries, xxt, r, lefts, rights, sort_id):
-    knn_ind = dict()
-    knn_dist = dict()
-    
-    for i in range(queries.shape[0]):
-        ddata_query = np.dot(data[lefts[i]:rights[i]], queries[i]) 
-        batch_dist_set = (xxt[lefts[i]:rights[i]] + inner_queries[i] - 2*ddata_query)
-
-        filter_r = batch_dist_set <= r
-        knn_ind[i] = sort_id[lefts[i]:rights[i]][filter_r]
-        knn_dist[i] = np.sqrt(batch_dist_set[filter_r])
-        
-    return knn_ind, knn_dist
- 
 def euclid(xxt, X, v):
     return (xxt + np.inner(v,v).ravel() -2*X.dot(v)).astype(float)
 
-
-@numba.njit(cache=False)
-def bisection_sort(queries, mu, v, sort_vals, r):
-    queries = np.subtract(queries, mu)
-    sv_qs = np.dot(queries, v)
-    lefts = np.searchsorted(sort_vals, sv_qs-r)
-    rights = np.searchsorted(sort_vals, sv_qs+r)
-    return queries, lefts, rights
