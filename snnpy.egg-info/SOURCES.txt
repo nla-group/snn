@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+snnpy/__init__.py
+snnpy/snnpy.cpp
+snnpy/snnpy.py
+snnpy.egg-info/PKG-INFO
+snnpy.egg-info/SOURCES.txt
+snnpy.egg-info/dependency_links.txt
+snnpy.egg-info/requires.txt
+snnpy.egg-info/top_level.txt
