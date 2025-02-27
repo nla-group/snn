@@ -1,12 +1,11 @@
 ## SNN: Fast and exact fixed-radius neighbor search
 
-[![C/C++ CI](https://github.com/nla-group/snn/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/nla-group/snn/actions/workflows/c-cpp.yml)
 [![!pypi](https://img.shields.io/pypi/v/snnpy?color=white)](https://pypi.org/project/snnpy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/532659733.svg)](https://zenodo.org/doi/10.5281/zenodo.10275013)
 
 
-SNN is a fast and exact fixed-radius nearest neighbor search algorithm [1]. It uses the first principal component of the data to prune the search space and speeds up Euclidean distance computations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. There is also a C++ implementation of SNN. 
+SNN is a fast and exact fixed-radius nearest neighbor search algorithm [1]. It uses the first principal component of the data to prune the search space and speeds up Euclidean distance computations using high-level BLAS routines. SNN is implemented in native Python. On many problems, SNN is faster than KDtree and Balltree in the scikit-learn package. 
 
 ### Reproducibility
 
