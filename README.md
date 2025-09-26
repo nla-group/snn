@@ -79,6 +79,7 @@ All the content in this repository is licensed under the MIT License.
 
 ## Reference
 
+```
 Chen X, Güttel S. 2024. Fast and exact fixed-radius neighbor search based on sorting. PeerJ Computer Science 10:e1929 https://doi.org/10.7717/peerj-cs.1929
 ```
 
